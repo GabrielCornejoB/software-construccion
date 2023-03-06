@@ -5,9 +5,8 @@ const counterModel = require('../models/counter.model');
 const primaryModel = require('../models/primary.model');
 
 router.post('/add-primary', async (req, res) => {
-    // Request fields
     const { primary, group, clasification, unit } = req.body;
-    // Validations
+
     if (!primary || !primary?.trim()) return res.status(400).send("Missing fields");
     const primaryExists = await primaryModel.findOne({ primary: primary });
     if (primaryExists) return res.status(400).send("Primary '" + primary + "' already exists");
@@ -21,7 +20,7 @@ router.post('/add-primary', async (req, res) => {
         counter = 1;
     }
     else counter = primaryCounterExists.counter + 1;
-    // Create and Add new primary
+
     const newPrimary = new primaryModel({ 
         id: counter,
         primary, 
@@ -59,12 +58,12 @@ router.post('/add-supplier-to-primary', async (req, res) => {
     return res.status(200).send("Supplier added to " + primaryIdExists.primary);
 });
 
-// router.post('/update-primary')
+// router.put('/update-primary')
 
-// router.____('/delete-primary')
+// router.delete('/delete-primary')
 
-// router.get('/get-primarys')
+// router.get('/get-primaries')
 
-// router.get('/get-provs-of-prim')
+// router.get('/get-suppliers-of-primary')
 
 module.exports = router;
