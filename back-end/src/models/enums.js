@@ -1,64 +1,64 @@
-class Unidad {
+class Unit {
     // Metro
-    static metro = new Unidad("m");
-    static metro2 = new Unidad("m2");
-    static metro3 = new Unidad("m3");
+    static meter = new Unit("m");
+    static squareMeter = new Unit("m2");
+    static cubicMeter = new Unit("m3");
+    static linealMeter = new Unit("ml");
     // Distancias transporte
-    static metro3_km = new Unidad("m3-km");
-    static viaje = new Unidad("viaje");
+    static cubicMeterKm = new Unit("m3-km");
+    static journey = new Unit("viaje");
     // Peso
-    static kilogramo = new Unidad("kg");
-    static tonelada = new Unidad("ton");
-    static libra = new Unidad("lb");
+    static kilogram = new Unit("kg");
+    static ton = new Unit("ton");
+    static pound = new Unit("lb");
     // Volumen
-    static galon = new Unidad("gal");
-    static ml = new Unidad("ml");
+    static gallon = new Unit("gal");
     // Tiempo
-    static hora = new Unidad("hr");
-    static dia = new Unidad("dia");
+    static hour = new Unit("hr");
+    static day = new Unit("dia");
     // Abstractos
-    static pipeta = new Unidad("pipeta");
-    static unidad = new Unidad("un");
-    static saco = new Unidad("saco");
-    static lata = new Unidad("lata");
-    static cunete = new Unidad("cuñete");
-    static rollo = new Unidad("rollo");
+    static pipet = new Unit("pipeta");
+    static unit = new Unit("un");
+    static bag = new Unit("saco");
+    static tin = new Unit("lata");
+    static keg = new Unit("cuñete");
+    static roll = new Unit("rollo");
 
     constructor(name) {
         this.name = name;
     }
 }
 
-class Clasificacion {
-    static aceros = new Clasificacion("Acero");
-    static aditivos = new Clasificacion("Aditivos");
-    static argos = new Clasificacion("Argos");
-    static aridos = new Clasificacion("Áridos");
-    static herrajes = new Clasificacion("Herrajes");
-    static maderas = new Clasificacion("Maderas");
-    static mezclas = new Clasificacion("Mezclas");
-    static prefabricados = new Clasificacion("Prefabricados");
-    static premezlcados = new Clasificacion("Premezclados");
-    static pvc = new Clasificacion("PVC");
-    static transportes = new Clasificacion("Transportes");
+class Clasification {
+    static steels = new Clasification("Acero");
+    static additives = new Clasification("Aditivos");
+    static argos = new Clasification("Argos");
+    static aggregates = new Clasification("Áridos");
+    static fittings = new Clasification("Herrajes");
+    static woods = new Clasification("Maderas");
+    static mixes = new Clasification("Mezclas");
+    static prefabs = new Clasification("Prefabricados");
+    static premixed = new Clasification("Premezclados");
+    static pvc = new Clasification("PVC");
+    static transport = new Clasification("Transportes");
 
     constructor(name) {
         this.name = name;
     }
 }
 
-class Grupo {
-    static disenos = new Grupo("Diseños");
-    static ensayos = new Grupo("Ensayos");
-    static equipos = new Grupo("Equipos");
-    static herramientas = new Grupo("Herramientas");
-    static manoDeObra = new Grupo("M.O.");
-    static materiales = new Grupo("Materiales");
-    static polimericos = new Grupo("Polimericos");
-    static servicios = new Grupo("Servicios");
-    static subcontrato = new Grupo("Subcontrato");
-    static subproducto = new Grupo("Subproducto");
-    static transportes = new Grupo("Transportes");
+class Group {
+    static designs = new Group("Diseños");
+    static testings = new Group("Ensayos");
+    static equipments = new Group("Equipos");
+    static tools = new Group("Herramientas");
+    static labour = new Group("M.O.");
+    static materials = new Group("Materiales");
+    static polymerics = new Group("Polimericos");
+    static services = new Group("Servicios");
+    static subcontracts = new Group("Subcontrato");
+    static subproducts = new Group("Subproducto");
+    static transport = new Group("Transportes");
 
     constructor(name) {
         this.name = name;
@@ -74,8 +74,8 @@ function getKeys(enumName) {
 }
 
 module.exports = {
-    Unidad,
-    Clasificacion, 
-    Grupo,
+    Unit,
+    Clasification, 
+    Group,
     getKeys
 }
