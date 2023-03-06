@@ -8,6 +8,7 @@ const port = process.env.PORT || 4201;
 app.use(cors());
 app.use(express.json());
 app.use('/api', require('./routes/primary.route'));
+app.use('/api', require('./routes/supplier.route'));
 
 app.listen(port);
 console.log("Server started on port:", port);
