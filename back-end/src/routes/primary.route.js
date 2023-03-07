@@ -62,7 +62,11 @@ router.post('/add-supplier-to-primary', async (req, res) => {
 
 // router.delete('/delete-primary')
 
-// router.get('/get-primaries')
+router.get('/get-primaries', async (req, res) => {
+    const primaries = await primaryModel.find().select('id primary group clasification unit defaultPrice defaultSupplier');
+    if (!primaries) return res.status(400).send("Empty collection");
+    return res.status(200).json(primaries);
+});
 
 // router.get('/get-suppliers-of-primary')
 
