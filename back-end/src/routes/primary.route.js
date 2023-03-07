@@ -59,7 +59,26 @@ router.post('/add-supplier-to-primary', async (req, res) => {
     return res.status(200).send("Supplier added to " + primaryIdExists.primary);
 });
 
-// router.put('/update-primary')
+// router.post('/set-default-supplier-of-primary')
+
+router.put('/update-primary', async (req, res) => {
+    const { id, primary, group, clasification, unit} = req.body;
+    if (!id?.toString().trim() || !primary?.trim()) return res.status(400).send("Missing fields");
+    const primaryIdExists = await primaryModel.findOne({id: id});
+    if (!primaryIdExists) return res.status(400).send("Primary doesn't exist");
+    const primaryExists = await primaryModel.findOne({ primary: primary });
+    if (primaryExists) return res.status(400).send("Primary '" + primary + "' already exists");
+    if (!getKeys(Unit).includes(unit)) return res.status(400).send("Unit '" + unit + "' is not valid");
+    if (!getKeys(Group).includes(group)) return res.status(400).send("Group '" + group + "' is not valid");
+    if (!getKeys(Clasification).includes(clasification)) return res.status(400).send("Clasification '" + clasification + "' is not valid");
+
+    primaryIdExists.primary = primary;
+    primaryIdExists.group = group;
+    primaryIdExists.clasification = clasification;
+    primaryIdExists.unit = unit;
+    await primaryIdExists.save();
+    return res.status(200).send("Primary updated succesfully");
+});
 
 // router.patch('/update-supplier-of-primary')
 
