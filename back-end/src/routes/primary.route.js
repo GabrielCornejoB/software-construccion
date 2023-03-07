@@ -61,7 +61,7 @@ router.post('/add-supplier-to-primary', async (req, res) => {
 
 // router.put('/update-primary')
 
-// router.put('/update-supplier-of-primary')
+// router.patch('/update-supplier-of-primary')
 
 router.delete('/delete-primary', async (req, res) => {
     const { primaryId } = req.body;
@@ -72,7 +72,19 @@ router.delete('/delete-primary', async (req, res) => {
     return res.status(200).send("Primary deleted succesfully");
 });
 
-// router.delete('/delete-supplier-of-primary')
+router.delete('/delete-supplier-of-primary', async (req, res) => {
+    const {primaryId, supplierId} = req.body;
+    if (!primaryId?.toString().trim() || !supplierId?.toString().trim()) return res.status(400).send("Missing fields");
+    const primaryExists = await primaryModel.findOne({id: primaryId});
+    if (!primaryExists) return res.status(400).send("Primary doesn't exist");
+    const suppliersIds = [];
+    for (let sup of primaryExists.suppliers) suppliersIds.push(sup.supplierId);
+    if (!suppliersIds.includes(supplierId)) return res.status(400).send("Primary doesn't has that supplier");
+    let index = suppliersIds.indexOf(supplierId);
+    primaryExists.suppliers.splice(index, 1);
+    await primaryExists.save();
+    return res.status(200).send("Supplier of primary deleted succesfully");
+});
 
 router.get('/get-primaries', async (req, res) => {
     const primaries = await primaryModel.find().select('id primary group clasification unit defaultPrice defaultSupplier');
