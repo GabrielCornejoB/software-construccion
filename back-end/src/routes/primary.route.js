@@ -3,6 +3,7 @@ const router = Router();
 const { Unit, Group, Clasification, getKeys } = require('../models/enums');
 const counterModel = require('../models/counter.model');
 const primaryModel = require('../models/primary.model');
+const supplierModel = require('../models/supplier.model');
 
 router.post('/add-primary', async (req, res) => {
     const { primary, group, clasification, unit } = req.body;
@@ -41,25 +42,26 @@ router.post('/add-supplier-to-primary', async (req, res) => {
         !discount?.toString().trim() || !primaryId?.toString().trim()) {
         return res.status(400).send('Missing fields');
     }    
+    const primaryIdExists = await primaryModel.findOne({id: primaryId});
+    if (!primaryIdExists) return res.status(400).send("Primary with id: '" + primaryId + "' doesn't exist");
+    const supplierIdExists = await supplierModel.findOne({id: supplierId});
+    if (!supplierIdExists) return res.status(400).send("Supplier with id: '" + supplierId + "' doesn't exist");
+    const suppliersIds = [];
+    for (let sup of primaryIdExists.suppliers) suppliersIds.push(sup.supplierId);
+    if (suppliersIds.includes(supplierId)) return res.status(400).send("Primary already has this provider");
     const values = {
         supplierId,
+        supplier: supplierIdExists.supplier,
         listPrice,
         iva,
         discount,
         unitaryPrice: (listPrice * (1+iva/100)) * (100-discount)/100,
         updateDate: new Date()
     }
-    const primaryIdExists = await primaryModel.findOne({id: primaryId});
-    if (!primaryIdExists) return res.status(400).send("Primary with id: '" + primaryId + "' doesn't exist");
-    const suppliersIds = [];
-    for (let sup of primaryIdExists.suppliers) suppliersIds.push(sup.supplierId);
-    if (suppliersIds.includes(supplierId)) return res.status(400).send("Primary already has this provider");
     primaryIdExists.suppliers.push(values);
     await primaryIdExists.save();
     return res.status(200).send("Supplier added to " + primaryIdExists.primary);
 });
-
-// router.post('/set-default-supplier-of-primary')
 
 router.put('/update-primary', async (req, res) => {
     const { id, primary, group, clasification, unit} = req.body;
@@ -80,7 +82,30 @@ router.put('/update-primary', async (req, res) => {
     return res.status(200).send("Primary updated succesfully");
 });
 
-// router.patch('/update-supplier-of-primary')
+router.patch('/update-supplier-of-primary', async (req, res) => {
+    const { primaryId, supplierId, listPrice, iva, discount } = req.body;
+    if (!supplierId?.toString().trim() || !listPrice?.toString().trim() || !iva?.toString().trim() || 
+        !discount?.toString().trim() || !primaryId?.toString().trim()) {
+        return res.status(400).send('Missing fields');
+    }   
+    const primaryIdExists = await primaryModel.findOne({id: primaryId});
+    if (!primaryIdExists) return res.status(400).send("Primary with id: '" + primaryId + "' doesn't exist");
+    const suppliersIds = [];
+    for (let sup of primaryIdExists.suppliers) suppliersIds.push(sup.supplierId);
+    if (!suppliersIds.includes(supplierId)) return res.status(400).send("Primary doesn't has that supplier");
+    let index = suppliersIds.indexOf(supplierId);
+    primaryIdExists.suppliers[index].listPrice = listPrice;
+    primaryIdExists.suppliers[index].iva = iva;
+    primaryIdExists.suppliers[index].discount = discount;
+    primaryIdExists.suppliers[index].unitaryPrice = (listPrice * (1+iva/100)) * (100-discount)/100;
+    primaryIdExists.suppliers[index].updateDate = new Date();
+    await primaryIdExists.save();
+    return res.status(200).send("Supplier updated succesfully");
+});
+
+// router.patch('/set-default-supplier-of-primary', async (req, res) => {
+//     const { primaryId, defaultPrice, defaultSupplier } = req.body;
+// });
 
 router.delete('/delete-primary', async (req, res) => {
     const { primaryId } = req.body;

@@ -11,6 +11,7 @@ const primarySchema = new Schema(
         defaultSupplier: String,
         suppliers: [{
             supplierId: Number,
+            supplier: String,
             listPrice: Number,
             iva: Number,
             discount: Number,
