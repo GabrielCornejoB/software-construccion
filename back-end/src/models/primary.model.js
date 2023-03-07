@@ -8,10 +8,9 @@ const primarySchema = new Schema(
         clasification: String,
         unit: String,
         defaultPrice: Number,
-        defaultSupplier: String,
+        defaultSupplier: Number,
         suppliers: [{
             supplierId: Number,
-            supplier: String,
             listPrice: Number,
             iva: Number,
             discount: Number,
