@@ -51,7 +51,7 @@ router.post('/add-supplier-to-primary', async (req, res) => {
         observations
     }
     const primaryIdExists = await primaryModel.findOne({id: primaryId});
-    if (!primaryIdExists) return res.status(400).send("Primary with id: '" + primaryId + "' doesn't exists");
+    if (!primaryIdExists) return res.status(400).send("Primary with id: '" + primaryId + "' doesn't exist");
     // Colocar validación para que proveedores no puedan repetirse
     primaryIdExists.suppliers.push(values);
     await primaryIdExists.save();
@@ -68,6 +68,13 @@ router.get('/get-primaries', async (req, res) => {
     return res.status(200).json(primaries);
 });
 
-// router.get('/get-suppliers-of-primary')
+router.get('/get-suppliers-of-primary', async (req, res) => {
+    const { primaryId } = req.body;
+    if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
+    const primaryExists = await primaryModel.findOne({ id: primaryId }).select('suppliers');
+    if (!primaryExists) return res.status(400).send("Primary doesn't exist");
+    if (primaryExists.suppliers.length == 0) return res.status(200).send("Primary has 0 providers");
+    return res.status(200).json(primaryExists);
+});
 
 module.exports = router;
