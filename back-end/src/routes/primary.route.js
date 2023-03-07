@@ -63,9 +63,16 @@ router.post('/add-supplier-to-primary', async (req, res) => {
 
 // router.put('/update-supplier-of-primary')
 
-// router.delete('/delete-primary')
+router.delete('/delete-primary', async (req, res) => {
+    const { primaryId } = req.body;
+    if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
+    const primaryExists = await primaryModel.findOne({id: primaryId});
+    if (!primaryExists) return res.status(400).send("Primary doesn't exist");
+    await primaryModel.deleteOne({ id: primaryId });
+    return res.status(200).send("Primary deleted succesfully");
+});
 
-// router.delete('delete-supplier-of-primary')
+// router.delete('/delete-supplier-of-primary')
 
 router.get('/get-primaries', async (req, res) => {
     const primaries = await primaryModel.find().select('id primary group clasification unit defaultPrice defaultSupplier');
