@@ -137,9 +137,32 @@ router.delete('/delete-supplier-of-primary', async (req, res) => {
 });
 
 router.get('/get-primaries', async (req, res) => {
-    const primaries = await primaryModel.find().select('id primary group clasification unit defaultPrice defaultSupplier');
-    if (!primaries) return res.status(400).send("Empty collection");
-    return res.status(200).json(primaries);
+    // const primaries = await primaryModel.find().select('id primary group clasification unit defaultPrice defaultSupplier');
+    // if (!primaries) return res.status(400).send("Empty collection");
+    const test = await primaryModel.aggregate([{
+        $lookup: 
+        {
+            from: "suppliers",
+            localField: "defaultSupplier",
+            foreignField: "id",
+            as: "supplierName"
+        }
+    }]).exec();
+    const output = [];
+    for (let obj of test) {
+        output.push(
+            {
+                id: obj.id,
+                primary: obj.id,
+                group: obj.group,
+                clasification: obj.clasification,
+                unit: obj.unit,
+                defaultPrice: obj.defaultPrice,
+                defaultSupplier: obj.supplierName[0].supplier
+            }
+        )
+    }
+    return res.status(200).json(output);
 });
 
 router.get('/get-suppliers-of-primary', async (req, res) => {
