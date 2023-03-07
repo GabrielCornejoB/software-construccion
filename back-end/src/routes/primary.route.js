@@ -29,7 +29,7 @@ router.post('/add-primary', async (req, res) => {
         clasification, 
         unit, 
         defaultPrice: 0,
-        defaultSupplier: ""
+        defaultSupplier: 0
     });
     await newPrimary.save();
     return res.status(200).send("'" + primary + "' added succesfully");
@@ -51,7 +51,6 @@ router.post('/add-supplier-to-primary', async (req, res) => {
     if (suppliersIds.includes(supplierId)) return res.status(400).send("Primary already has this provider");
     const values = {
         supplierId,
-        supplier: supplierIdExists.supplier,
         listPrice,
         iva,
         discount,
