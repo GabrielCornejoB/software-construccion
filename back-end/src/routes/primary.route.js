@@ -35,7 +35,7 @@ router.post('/add-primary', async (req, res) => {
 });
 
 router.post('/add-supplier-to-primary', async (req, res) => {
-    const {primaryId, supplierId, listPrice, iva, discount, observations} = req.body;
+    const {primaryId, supplierId, listPrice, iva, discount} = req.body;
 
     if (!supplierId?.toString().trim() || !listPrice?.toString().trim() || !iva?.toString().trim() || 
         !discount?.toString().trim() || !primaryId?.toString().trim()) {
@@ -47,12 +47,13 @@ router.post('/add-supplier-to-primary', async (req, res) => {
         iva,
         discount,
         unitaryPrice: (listPrice * (1+iva/100)) * (100-discount)/100,
-        updateDate: new Date(),
-        observations
+        updateDate: new Date()
     }
     const primaryIdExists = await primaryModel.findOne({id: primaryId});
     if (!primaryIdExists) return res.status(400).send("Primary with id: '" + primaryId + "' doesn't exist");
-    // Colocar validación para que proveedores no puedan repetirse
+    const suppliersIds = [];
+    for (let sup of primaryIdExists.suppliers) suppliersIds.push(sup.supplierId);
+    if (suppliersIds.includes(supplierId)) return res.status(400).send("Primary already has this provider");
     primaryIdExists.suppliers.push(values);
     await primaryIdExists.save();
     return res.status(200).send("Supplier added to " + primaryIdExists.primary);
@@ -60,7 +61,11 @@ router.post('/add-supplier-to-primary', async (req, res) => {
 
 // router.put('/update-primary')
 
+// router.put('/update-supplier-of-primary')
+
 // router.delete('/delete-primary')
+
+// router.delete('delete-supplier-of-primary')
 
 router.get('/get-primaries', async (req, res) => {
     const primaries = await primaryModel.find().select('id primary group clasification unit defaultPrice defaultSupplier');

@@ -15,8 +15,7 @@ const primarySchema = new Schema(
             iva: Number,
             discount: Number,
             unitaryPrice: Number,
-            updateDate: Date,
-            observations: String
+            updateDate: Date
         }]
     }
 )
