@@ -22,4 +22,10 @@ router.post('/add-supplier', async (req, res) => {
     return res.status(200).send("'" + supplier + "' added succesfully");
 });
 
+router.get('/get-suppliers', async (req, res) => {
+    const suppliers = await supplierModel.find();
+    if (!suppliers) return res.status(400).send("Empty collection");
+    return res.status(200).json(suppliers);
+});
+
 module.exports = router;
