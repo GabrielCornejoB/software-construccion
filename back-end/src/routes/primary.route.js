@@ -103,9 +103,16 @@ router.patch('/update-supplier-of-primary', async (req, res) => {
     return res.status(200).send("Supplier updated succesfully");
 });
 
-// router.patch('/set-default-supplier-of-primary', async (req, res) => {
-//     const { primaryId, defaultPrice, defaultSupplier } = req.body;
-// });
+router.patch('/set-default-supplier-of-primary', async (req, res) => {
+    const { primaryId, defaultPrice, defaultSupplier } = req.body;
+    if (!primaryId?.toString().trim() || !defaultPrice?.toString().trim() || !defaultSupplier?.toString().trim()) return res.status(400).send("Missing fields");
+    const primaryExists = await primaryModel.findOne({id: primaryId});
+    if (!primaryExists) return res.status(400).send("Primary doesn't exist");
+    primaryExists.defaultPrice = defaultPrice;
+    primaryExists.defaultSupplier = defaultSupplier;
+    await primaryExists.save();
+    return res.status(200).send("Default supplier of primary updated succesfully");
+});
 
 router.delete('/delete-primary', async (req, res) => {
     const { primaryId } = req.body;
