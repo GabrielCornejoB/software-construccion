@@ -28,4 +28,17 @@ router.get('/get-suppliers', async (req, res) => {
     return res.status(200).json(suppliers);
 });
 
+router.put('/update-supplier', async (req, res) => {
+    const { id, supplier } = req.body;
+    if (!id?.toString().trim() || !supplier?.toString().trim()) return res.status(400).send("Missing fields");
+    const supplierIdExists = await supplierModel.findOne({ id: id });
+    if (!supplierIdExists) return res.status(400).send("Supplier id '" + id + "' doesn't exist");
+    const supplierExists = await supplierModel.findOne({ supplier: supplier });
+    if (supplierExists) return res.status(400).send("Supplier '" + supplier + "' already exists");
+
+    supplierIdExists.supplier = supplier;
+    await supplierIdExists.save();
+    return res.status(200).send("Supplier updated");
+});
+
 module.exports = router;
