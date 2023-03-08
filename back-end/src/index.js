@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', require('./routes/primary.route'));
 app.use('/api', require('./routes/supplier.route'));
+app.use('/api', require('./routes/subproduct.route'));
 
 app.listen(port);
 console.log("Server started on port:", port);
