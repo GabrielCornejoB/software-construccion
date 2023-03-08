@@ -171,7 +171,29 @@ router.get('/get-suppliers-of-primary', async (req, res) => {
     const primaryExists = await primaryModel.findOne({ id: primaryId }).select('suppliers');
     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
     if (primaryExists.suppliers.length == 0) return res.status(200).send("Primary has 0 providers");
-    return res.status(200).json(primaryExists);
+
+    const test = await primaryModel.aggregate([
+        { $match: { id: primaryId } },
+        { $unwind: "$suppliers" },
+        { $lookup: {
+            from: "suppliers",
+            localField: "suppliers.supplierId",
+            foreignField: "id",
+            as: "suppliers.supplier"
+        }}
+    ]).exec();
+    const output = [];
+    for (let obj of test) {
+        output.push({
+            supplier: obj.suppliers.supplier[0].supplier,
+            listPrice: obj.suppliers.listPrice,
+            iva: obj.suppliers.iva,
+            discount: obj.suppliers.discount,
+            unitaryPrice: obj.suppliers.unitaryPrice,
+            updateDate: obj.suppliers.updateDate
+        })
+    }
+    return res.status(200).json(output);
 });
 
 module.exports = router;
