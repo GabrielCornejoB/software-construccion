@@ -165,6 +165,7 @@ router.get('/get-primaries', async (req, res) => {
     return res.status(200).json(output);
 });
 
+// posible cambio a '/get-primary-with-suppliers
 router.get('/get-suppliers-of-primary', async (req, res) => {
     const { primaryId } = req.body;
     if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");

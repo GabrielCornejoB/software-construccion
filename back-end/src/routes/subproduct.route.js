@@ -30,4 +30,16 @@ router.post('/add-subproduct', async (req, res) => {
     return res.status(200).send("Subproduct '" + subproduct + "' created succesfully");
 });
 
+// router.post('/add-component-to-subproduct');
+
+// router.put('/update-subproduct');
+
+// router.delete('/delete-subproduct');
+
+// router.delete('/delete-component-of-subproduct');
+
+// router.get('/get-subproducts');
+
+// router.get('./get-subproduct-with-components');
+
 module.exports = router;
