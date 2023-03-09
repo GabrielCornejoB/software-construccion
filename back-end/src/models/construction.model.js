@@ -4,6 +4,7 @@ const constructionModel = new Schema(
     {
         id: Number,
         description: String,
+        details: String,
         cost: Number,
         value: Number,
         revenue: Number,
