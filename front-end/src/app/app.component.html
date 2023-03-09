@@ -1,1 +1,16 @@
-<p>Hola mundo</p>
+<div class="main-container">
+    <nav class="navigation">
+        <a class="home-icon" routerLink="/home"><span class="material-symbols-outlined home-icon-size">logo_dev</span></a>
+        <div class="links">
+            <a routerLink="/primaries"><span class="material-symbols-outlined icon-size">counter_1</span></a>
+            <a routerLink=""><span class="material-symbols-outlined icon-size">counter_2</span></a>
+            <a routerLink=""><span class="material-symbols-outlined icon-size">counter_3</span></a>
+            <a routerLink=""><span class="material-symbols-outlined icon-size">counter_4</span></a>
+            <a routerLink=""><span class="material-symbols-outlined icon-size">counter_5</span></a>
+        </div>
+        <p class="nav-footer"></p>
+    </nav>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div> 
+</div>
