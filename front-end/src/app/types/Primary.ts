@@ -15,3 +15,11 @@ export interface Primary {
         updateDate: Date
     }]
 }
+export interface SupplierOfPrimary {
+    supplierId: Number,
+    listPrice: Number,
+    iva: Number,
+    discount: Number,
+    unitaryPrice: Number,
+    updateDate: Date
+}

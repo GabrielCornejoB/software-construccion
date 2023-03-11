@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Primary } from '../types/Primary';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Primary, SupplierOfPrimary } from '../types/Primary';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,12 @@ export class PrimariesService {
 
   constructor(private http: HttpClient) { }
 
-  getPrimaries() {
+  getPrimaries(){
     return this.http.get<Primary[]>(this.URL + "/get-primaries");
+  }
+  getPrimaryWithSuppliers(id: number){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("id", 4)
+    return this.http.get<SupplierOfPrimary[]>(this.URL + "/get-primary-with-suppliers", {params: queryParams});
   }
 }
