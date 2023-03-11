@@ -9,7 +9,6 @@ import { SupplierOfPrimary } from 'src/app/types/Primary';
   styleUrls: ['./primaries-detail.component.sass']
 })
 export class PrimariesDetailComponent implements OnInit {
-  id_text: string = "";
   constructor(private route: ActivatedRoute, private primariesService: PrimariesService) {}
 
   data: SupplierOfPrimary[] = []

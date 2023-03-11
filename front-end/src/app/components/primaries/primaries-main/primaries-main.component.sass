@@ -1,57 +1,42 @@
-.container
-    height: 100vh
-    box-sizing: border-box
-    padding: 30px
-    .title
-        margin: 0 10px 30px 
-        display: flex
-        flex-direction: row
-        align-items: center
-        justify-content: space-between
-    hr
-        height: 2px
-        opacity: 20%
-        background: var(--gray)
-        border: none
-    .primaries-table
+.primaries-table
+    display: flex
+    flex-direction: column
+    margin: 30px 10px 0
+    .align-primaries
+        grid-template-columns: 3% auto 10% 10% 7% 10% 10% 170px 10% 
+    .headings
+        display: grid
+        padding: 0 25px 15px
+    .data
         display: flex
         flex-direction: column
-        margin: 30px 10px 0
-        .align-primaries
-            grid-template-columns: 3% auto 10% 10% 7% 10% 10% 170px 10% 
-        .headings
-            display: grid
-            padding: 0 25px 15px
-        .data
-            display: flex
-            flex-direction: column
-            row-gap: 30px
-            .entry
-                .entry-text
-                    height: 41px
-                    display: flex
-                    align-items: center
-                    p
-                        text-align: left
-                .entry-buttons
-                    height: 41px
-                    display: flex
-                    flex-direction: row
-                    align-items: center
-                    justify-content: space-evenly
-                    .update-button
-                        background: var(--yellow)
-                        color: var(--white)
-                        padding: 9px
-                        border-radius: 10px
-                        transition: 0.6s
-                    .delete-button
-                        background: var(--red)
-                        color: var(--white)
-                        padding: 9px
-                        border-radius: 10px
-                        transition: 0.6s
-                    &>:hover
-                        cursor: pointer
-                        transform: scale(1.1)
-                        
+        row-gap: 30px
+        .entry
+            .entry-text
+                height: 41px
+                display: flex
+                align-items: center
+                p
+                    text-align: left
+            .entry-buttons
+                height: 41px
+                display: flex
+                flex-direction: row
+                align-items: center
+                justify-content: space-evenly
+                .update-button
+                    background: var(--yellow)
+                    color: var(--white)
+                    padding: 9px
+                    border-radius: 10px
+                    transition: 0.6s
+                .delete-button
+                    background: var(--red)
+                    color: var(--white)
+                    padding: 9px
+                    border-radius: 10px
+                    transition: 0.6s
+                &>:hover
+                    cursor: pointer
+                    transform: scale(1.1)
+                    
