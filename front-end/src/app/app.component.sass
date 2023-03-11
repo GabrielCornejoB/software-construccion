@@ -25,8 +25,21 @@ $nav-width: 75px
             align-items: center
             justify-content: space-evenly
             height: 40vh
+            width: $nav-width
+            .link
+                width: $nav-width - 15px
+                height: $nav-width - 15px
+                display: flex
+                align-items: center
+                justify-content: center
             a
                 text-decoration: none
+                &.success
+                    background: var(--blue)
+                    border-radius: 10px
+                    span                     
+                        color: var(--white)
+                        
         .nav-footer
             height: 56px
             width: 20px

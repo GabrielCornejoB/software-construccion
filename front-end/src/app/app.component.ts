@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'software-construccion';
+  active: number = 0;
+  toggleClass(newActive: number){
+    this.active = newActive;
+  }
 }
