@@ -16,48 +16,22 @@
             <h6>Otros proveedores</h6>
         </div>
         <div class="data">
-            <div class="entry align-primaries">
-                <div class="entry-text"><p>1</p></div>
-                <div class="entry-text"><p>Reja de sumidero</p></div>
-                <div class="entry-text"><p>Materiales</p></div>
-                <div class="entry-text"><p>Herrajes</p></div>
-                <div class="entry-text"><p>un</p></div>
-                <div class="entry-text"><p>$ 222.292</p></div>
-                <div class="entry-text"><p>El Tunel</p></div>
-                <div class="entry-text"><a href="" class="button smaller-button">Otros proveedores</a></div>
-                <div class="entry-buttons">
-                    <span class="material-symbols-outlined update-button">edit</span>
-                    <span class="material-symbols-outlined delete-button">delete</span>
+            <ng-container *ngFor="let p of primaries">
+                <div class="entry align-primaries">
+                    <div class="entry-text"><p>{{ p.id }}</p></div>
+                    <div class="entry-text"><p>{{ p.primary }}</p></div>
+                    <div class="entry-text"><p>{{ p.group }}</p></div>
+                    <div class="entry-text"><p>{{ p.clasification }}</p></div>
+                    <div class="entry-text"><p>{{ p.unit }}</p></div>
+                    <div class="entry-text"><p>{{ p.defaultPrice }}</p></div>
+                    <div class="entry-text"><p>{{ p.defaultSupplier }}</p></div>
+                    <div class="entry-text"><a [routerLink]="['/primaries','detail',p.id]" class="button smaller-button">Otros proveedores</a></div>
+                    <div class="entry-buttons">
+                        <span class="material-symbols-outlined update-button">edit</span>
+                        <span class="material-symbols-outlined delete-button">delete</span>
+                    </div>
                 </div>
-            </div>
-            <div class="entry align-primaries">
-                <div class="entry-text"><p>2</p></div>
-                <div class="entry-text"><p>Gasolina</p></div>
-                <div class="entry-text"><p>Materiales</p></div>
-                <div class="entry-text"><p>Combustibles</p></div>
-                <div class="entry-text"><p>gal</p></div>
-                <div class="entry-text"><p>$ 9.500</p></div>
-                <div class="entry-text"><p>Terpel</p></div>
-                <div class="entry-text"><a href="" class="button smaller-button">Otros proveedores</a></div>
-                <div class="entry-buttons">
-                    <span class="material-symbols-outlined update-button">edit</span>
-                    <span class="material-symbols-outlined delete-button">delete</span>
-                </div>
-            </div>
-            <div class="entry align-primaries">
-                <div class="entry-text"><p>3</p></div>
-                <div class="entry-text"><p>Base granular</p></div>
-                <div class="entry-text"><p>Materiales</p></div>
-                <div class="entry-text"><p>Áridos</p></div>
-                <div class="entry-text"><p>m3</p></div>
-                <div class="entry-text"><p>$ 59.472</p></div>
-                <div class="entry-text"><p>Santa Rita</p></div>
-                <div class="entry-text"><a href="" class="button smaller-button">Otros proveedores</a></div>
-                <div class="entry-buttons">
-                    <span class="material-symbols-outlined update-button">edit</span>
-                    <span class="material-symbols-outlined delete-button">delete</span>
-                </div>
-            </div>
+            </ng-container>    
         </div>
     </div>
 </div>

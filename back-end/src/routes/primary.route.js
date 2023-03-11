@@ -153,7 +153,7 @@ router.get('/get-primaries', async (req, res) => {
         output.push(
             {
                 id: obj.id,
-                primary: obj.id,
+                primary: obj.primary,
                 group: obj.group,
                 clasification: obj.clasification,
                 unit: obj.unit,

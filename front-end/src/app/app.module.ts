@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PrimariesMainComponent } from './components/primaries/primaries-main/primaries-main.component';
 import { PrimariesDetailComponent } from './components/primaries/primaries-detail/primaries-detail.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PrimariesDetailComponent } from './components/primaries/primaries-detai
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
