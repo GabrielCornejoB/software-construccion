@@ -168,7 +168,7 @@ exports.getSuppliersOfPrimary = async (req, res) => {
         let primaryId = req.params.id;
         const primaryExists = await Primary.findOne({ id: primaryId }).select('suppliers');
         if (!primaryExists) return res.status(404).json({msg: "Primary doesn't exist"});
-        if (primaryExists.suppliers.length == 0) return res.status(400).json({msg: "Primary has 0 providers"});
+        if (primaryExists.suppliers.length == 0) return res.status(400).json({msg: "Primary has 0 suppliers"});
         primaryId = parseInt(primaryId);
         const test = await Primary.aggregate([
             { $match: { id: primaryId } },
@@ -235,7 +235,16 @@ exports.setDefaultSupplierOfPrimary = async (req, res) => {
 
 exports.deleteSupplierOfPrimary = async (req, res) => {
     try {
-        
+        const primaryExists = await Primary.findOne({id: req.params.id});
+        if (!primaryExists) return res.status(404).json({msg: "Primary doesn't exist"});
+        const suppliersIds = [];
+        for (let sup of primaryExists.suppliers) suppliersIds.push(sup.supplierId);
+        let supplierId = parseInt(req.params.supplierId);
+        if (!suppliersIds.includes(supplierId)) return res.status(400).json({msg: "Primary doesn't has that supplier"});
+        let index = suppliersIds.indexOf(supplierId);
+        primaryExists.suppliers.splice(index, 1);
+        await primaryExists.save();
+        return res.json(primaryExists);
     } catch (error) {
         res.status(500).send("" + error);
     }
