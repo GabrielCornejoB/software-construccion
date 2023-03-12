@@ -16,6 +16,8 @@ router.post('/add-supplier-to-primary/:id/:supplierId', primaryController.addSup
 
 router.get('/get-suppliers-of-primary/:id', primaryController.getSuppliersOfPrimary);
 
+router.patch('/update-supplier-of-primary/:id/:supplierId', primaryController.updateSupplierOfPrimary);
+
 // router.patch('/update-supplier-of-primary', async (req, res) => {
 //     const { primaryId, supplierId, listPrice, iva, discount } = req.body;
 //     if (!supplierId?.toString().trim() || !listPrice?.toString().trim() || !iva?.toString().trim() || 
@@ -60,37 +62,6 @@ router.get('/get-suppliers-of-primary/:id', primaryController.getSuppliersOfPrim
 //     primaryExists.suppliers.splice(index, 1);
 //     await primaryExists.save();
 //     return res.status(200).send("Supplier of primary deleted succesfully");
-// });
-
-// router.get('/get-suppliers-of-primary/:id', async (req, res) => {
-//     let primaryId = req.params.id;
-//     // if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
-//     const primaryExists = await primaryModel.findOne({ id: primaryId }).select('suppliers');
-//     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
-//     if (primaryExists.suppliers.length == 0) return res.status(400).send("Primary has 0 providers");
-//     primaryId = parseInt(primaryId);
-//     const test = await primaryModel.aggregate([
-//         { $match: { id: primaryId } },
-//         { $unwind: "$suppliers" },
-//         { $lookup: {
-//             from: "suppliers",
-//             localField: "suppliers.supplierId",
-//             foreignField: "id",
-//             as: "suppliers.supplier"
-//         }}
-//     ]).exec();
-//     const output = [];
-//     for (let obj of test) {
-//         output.push({
-//             supplier: obj.suppliers.supplier[0].supplier,
-//             listPrice: obj.suppliers.listPrice,
-//             iva: obj.suppliers.iva,
-//             discount: obj.suppliers.discount,
-//             unitaryPrice: obj.suppliers.unitaryPrice,
-//             updateDate: obj.suppliers.updateDate
-//         })
-//     }
-//     return res.status(200).json(output);
 // });
 
 module.exports = router;

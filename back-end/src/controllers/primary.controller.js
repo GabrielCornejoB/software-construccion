@@ -147,8 +147,6 @@ exports.addSupplierToPrimary = async (req, res) => {
         if (!supplierExists) return res.status(404).json({msg: "Supplier doesn't exist"});
         const suppliersIds = [];
         for (let sup of primaryExists.suppliers) suppliersIds.push(sup.supplierId);
-        console.log(suppliersIds);
-        console.log(req.params.supplierId);
         if (suppliersIds.includes(parseInt(req.params.supplierId))) return res.status(400).send("Primary already has this supplier");
         const values = {
             supplierId: req.params.supplierId,
@@ -197,4 +195,26 @@ exports.getSuppliersOfPrimary = async (req, res) => {
     } catch (error) {
         res.status(500).send("" + error);
     }
+}
+
+exports.updateSupplierOfPrimary = async (req, res) => {
+    try {
+        const { listPrice, iva, discount } = req.body;
+        const primaryExists = await Primary.findOne({id: req.params.id});
+        if (!primaryExists) return res.status(404).json({msg: "Primary doesn't exist"});
+        const suppliersIds = [];
+        for (let sup of primaryExists.suppliers) suppliersIds.push(sup.supplierId);
+        if (!suppliersIds.includes(parseInt(req.params.supplierId))) return res.status(400).json({msg: "Primary doesn't has that supplier"});
+        let index = suppliersIds.indexOf(parseInt(req.params.supplierId));
+        primaryExists.suppliers[index].listPrice = listPrice;
+        primaryExists.suppliers[index].iva = iva;
+        primaryExists.suppliers[index].discount = discount;
+        primaryExists.suppliers[index].unitaryPrice = (listPrice * (1+iva/100)) * (100-discount)/100;
+        primaryExists.suppliers[index].updateDate = new Date();
+        await primaryExists.save();
+        res.json(primaryExists.suppliers[index]);
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+    
 }
