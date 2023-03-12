@@ -30,7 +30,7 @@ class Unit {
 }
 
 class Clasification {
-    static steels = new Clasification("Acero");
+    static steels = new Clasification("Aceros");
     static additives = new Clasification("Aditivos");
     static argos = new Clasification("Argos");
     static aggregates = new Clasification("Áridos");
