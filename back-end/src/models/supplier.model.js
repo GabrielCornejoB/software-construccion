@@ -2,8 +2,8 @@ const { Schema, model } = require('mongoose');
 
 const supplierSchema = new Schema(
     {
-        id: Number,
-        supplier: String
+        id: {type: Number, required: true},
+        supplier: {type: String, required: true}
     }
 );
 

@@ -1,5 +1,6 @@
 const Primary = require("../models/primary.model");
 const Counter = require("../models/counter.model");
+const Supplier = require("../models/supplier.model");
 
 exports.addPrimary = async (req, res) => {
     try {
@@ -132,6 +133,33 @@ exports.deletePrimary = async (req, res) => {
         if (!primaryExists) return res.status(404).send("Primary doesn't exist");
         await Primary.deleteOne({ id: req.params.id });
         res.json({msg: "Primary Deleted succesfully"});
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+}
+
+exports.addSupplierToPrimary = async (req, res) => {
+    try {
+        const { listPrice, iva, discount } = req.body;
+        const primaryExists = await Primary.findOne({id: req.params.id});
+        if (!primaryExists) return res.status(404).json({msg: "Primary doesn't exist"});
+        const supplierExists = await Supplier.findOne({id: req.params.supplierId});
+        if (!supplierExists) return res.status(404).json({msg: "Supplier doesn't exist"});
+        const suppliersIds = [];
+        for (let sup of primaryExists.suppliers) suppliersIds.push(sup.supplierId);
+        console.log(suppliersIds);
+        console.log(req.params.supplierId);
+        if (suppliersIds.includes(parseInt(req.params.supplierId))) return res.status(400).send("Primary already has this supplier");
+        const values = {
+            supplierId: req.params.supplierId,
+            listPrice,
+            iva,
+            discount,
+            unitaryPrice: (listPrice * (1+iva/100)) * (100-discount)/100
+        }
+        primaryExists.suppliers.push(values);
+        await primaryExists.save();
+        res.json(primaryExists);
     } catch (error) {
         res.status(500).send("" + error);
     }
