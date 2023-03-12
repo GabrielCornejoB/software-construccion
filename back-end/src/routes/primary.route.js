@@ -6,6 +6,8 @@ router.post('/add-primary', primaryController.addPrimary);
 
 router.get('/get-primaries', primaryController.getPrimaries);
 
+router.get('/get-primary/:id', primaryController.getPrimary);
+
 router.put('/update-primary/:id', primaryController.updatePrimary);
 
 // router.post('/add-supplier-to-primary', async (req, res) => {

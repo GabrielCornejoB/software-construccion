@@ -4,7 +4,7 @@ const Counter = require("../models/counter.model");
 exports.addPrimary = async (req, res) => {
     try {
         const primaryExists = await Primary.findOne({primary: req.body.primary});
-        if (primaryExists) throw new Error("Primary already exists");
+        if (primaryExists) return res.status(400).json({msg: "Primary already exists"});
         const primaryCounterExists = await Counter.findOneAndUpdate({ collectionName: "primaries" }, { $inc: { "counter": 1 }});
         let counter = 0;
         if (!primaryCounterExists) {
@@ -90,4 +90,42 @@ exports.updatePrimary = async (req, res) => {
         else if (error.errors?.group) return res.status(400).send("Invalid or missing field 'group'");
         else return res.status(500).send("" + error);
     }
+}
+
+exports.getPrimary = async (req, res) => {
+    try {
+        const primaryExists = await Primary.findOne({ id: req.params.id });
+        if (!primaryExists) return res.status(404).send("Primary doesn't exist");
+        let primaryId = parseInt(req.params.id);
+        const obj = await Primary.aggregate([
+            { $match: {id: primaryId} },
+            { $lookup: 
+            {
+                from: "suppliers",
+                localField: "defaultSupplier",
+                foreignField: "id",
+                as: "supplierName"
+            }
+        }]).exec();
+        let supplier = "-";
+        if (obj[0].supplierName.length > 0) {
+            supplier = obj[0].supplierName[0].supplier;
+        }
+        const output = {
+            id: obj[0].id,
+            primary: obj[0].primary,
+            group: obj[0].group,
+            clasification: obj[0].clasification,
+            unit: obj[0].unit,
+            defaultPrice: obj[0].defaultPrice,
+            defaultSupplier: supplier
+        }
+        res.json(output);
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+}
+
+exports.deletePrimary = async (req, res) => {
+
 }
