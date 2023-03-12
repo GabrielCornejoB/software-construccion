@@ -211,6 +211,10 @@ exports.updateSupplierOfPrimary = async (req, res) => {
         primaryExists.suppliers[index].discount = discount;
         primaryExists.suppliers[index].unitaryPrice = (listPrice * (1+iva/100)) * (100-discount)/100;
         primaryExists.suppliers[index].updateDate = new Date();
+        if (primaryExists.defaultSupplier == parseInt(req.params.supplierId)) {
+            primaryExists.defaultSupplier = req.params.supplierId;
+            primaryExists.defaultPrice = primaryExists.suppliers[index].unitaryPrice;
+        }
         await primaryExists.save();
         res.json(primaryExists.suppliers[index]);
     } catch (error) {
@@ -243,6 +247,10 @@ exports.deleteSupplierOfPrimary = async (req, res) => {
         if (!suppliersIds.includes(supplierId)) return res.status(400).json({msg: "Primary doesn't has that supplier"});
         let index = suppliersIds.indexOf(supplierId);
         primaryExists.suppliers.splice(index, 1);
+        if (primaryExists.defaultSupplier == supplierId) {
+            primaryExists.defaultPrice = 0;
+            primaryExists.defaultSupplier = 0;
+        }    
         await primaryExists.save();
         return res.json(primaryExists);
     } catch (error) {
