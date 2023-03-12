@@ -164,3 +164,37 @@ exports.addSupplierToPrimary = async (req, res) => {
         res.status(500).send("" + error);
     }
 }
+
+exports.getSuppliersOfPrimary = async (req, res) => {
+    try {
+        let primaryId = req.params.id;
+        const primaryExists = await Primary.findOne({ id: primaryId }).select('suppliers');
+        if (!primaryExists) return res.status(404).json({msg: "Primary doesn't exist"});
+        if (primaryExists.suppliers.length == 0) return res.status(400).json({msg: "Primary has 0 providers"});
+        primaryId = parseInt(primaryId);
+        const test = await Primary.aggregate([
+            { $match: { id: primaryId } },
+            { $unwind: "$suppliers" },
+            { $lookup: {
+                from: "suppliers",
+                localField: "suppliers.supplierId",
+                foreignField: "id",
+                as: "suppliers.supplier"
+            }}
+        ]).exec();
+        const output = [];
+        for (let obj of test) {
+            output.push({
+                supplier: obj.suppliers.supplier[0].supplier,
+                listPrice: obj.suppliers.listPrice,
+                iva: obj.suppliers.iva,
+                discount: obj.suppliers.discount,
+                unitaryPrice: obj.suppliers.unitaryPrice,
+                updateDate: obj.suppliers.updateDate
+            })
+        }
+        res.json(output);
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+}

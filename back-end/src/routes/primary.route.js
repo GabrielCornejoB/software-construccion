@@ -14,6 +14,8 @@ router.delete('/delete-primary/:id', primaryController.deletePrimary);
 
 router.post('/add-supplier-to-primary/:id/:supplierId', primaryController.addSupplierToPrimary);
 
+router.get('/get-suppliers-of-primary/:id', primaryController.getSuppliersOfPrimary);
+
 // router.patch('/update-supplier-of-primary', async (req, res) => {
 //     const { primaryId, supplierId, listPrice, iva, discount } = req.body;
 //     if (!supplierId?.toString().trim() || !listPrice?.toString().trim() || !iva?.toString().trim() || 
