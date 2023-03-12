@@ -15,11 +15,13 @@ export class PrimariesService {
     return this.http.get<Primary[]>(this.URL + "/get-primaries");
   }
   getPrimaryWithSuppliers(id: string){
-    // let queryParams = new HttpParams();
-    // queryParams = queryParams.append("id", id)
     return this.http.get<SupplierOfPrimary[]>(this.URL + "/get-suppliers-of-primary/" + id);
   }
   getPrimary(id: any): Observable<Primary> {
     return this.http.get<Primary>(this.URL + "/get-primary/" + id);
+  }
+
+  deletePrimary(id: string): Observable<any> {
+    return this.http.delete(this.URL + "/delete-primary/" + id);
   }
 }

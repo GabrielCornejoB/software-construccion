@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PrimariesService } from 'src/app/services/primaries.service';
 import { Primary } from 'src/app/types/Primary';
 
@@ -15,8 +16,17 @@ export class PrimariesMainComponent implements OnInit  {
     this.getPrimaries();
   }
   getPrimaries(): void {
-    this.primariesService.getPrimaries().subscribe(primaries => {
-      this.primaries = primaries
+    this.primariesService.getPrimaries().subscribe(data => {
+      this.primaries = data;
+    }, error => {
+      console.log(error);
     });
+  }
+  deletePrimary(id: any): void {
+    this.primariesService.deletePrimary(id).subscribe(data => {
+      console.log("Eliminado con exito");
+    }, error => {
+      console.log(error);
+    })
   }
 }

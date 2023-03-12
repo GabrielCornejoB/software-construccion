@@ -62,10 +62,10 @@ router.post('/add-supplier-to-primary', async (req, res) => {
     return res.status(200).send("Supplier added to " + primaryIdExists.primary);
 });
 
-router.put('/update-primary', async (req, res) => {
-    const { id, primary, group, clasification, unit} = req.body;
-    if (!id?.toString().trim() || !primary?.trim()) return res.status(400).send("Missing fields");
-    const primaryIdExists = await primaryModel.findOne({id: id});
+router.put('/update-primary/:id', async (req, res) => {
+    const { primary, group, clasification, unit} = req.body;
+    if (!primary?.trim()) return res.status(400).send("Missing fields");
+    const primaryIdExists = await primaryModel.findOne({id: req.params.id});
     if (!primaryIdExists) return res.status(400).send("Primary doesn't exist");
     const primaryExists = await primaryModel.findOne({ primary: primary });
     if (primaryExists) return res.status(400).send("Primary '" + primary + "' already exists");
@@ -113,12 +113,10 @@ router.patch('/set-default-supplier-of-primary', async (req, res) => {
     return res.status(200).send("Default supplier of primary updated succesfully");
 });
 
-router.delete('/delete-primary', async (req, res) => {
-    const { primaryId } = req.body;
-    if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
-    const primaryExists = await primaryModel.findOne({id: primaryId});
+router.delete('/delete-primary/:id', async (req, res) => {
+    const primaryExists = await primaryModel.findOne({id: req.params.id});
     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
-    await primaryModel.deleteOne({ id: primaryId });
+    await primaryModel.deleteOne({ id: req.params.id });
     return res.status(200).send("Primary deleted succesfully");
 });
 
@@ -167,12 +165,12 @@ router.get('/get-primaries', async (req, res) => {
     return res.status(200).json(output);
 });
 
-router.get('/get-primary', async (req, res) => {
-    let primaryId = req.query.id;
-    if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
-    const primaryExists = await primaryModel.findOne({ id: primaryId });
+router.get('/get-primary/:id', async (req, res) => {
+    // let primaryId = req.params.id;
+    // if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
+    const primaryExists = await primaryModel.findOne({ id: req.params.id });
     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
-    primaryId = parseInt(primaryId);
+    primaryId = parseInt(req.params.id);
     const obj = await primaryModel.aggregate([
         { $match: {id: primaryId} },
         { $lookup: 

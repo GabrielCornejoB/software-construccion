@@ -15,7 +15,7 @@
             <h6>Proveedor</h6>
             <h6>Otros proveedores</h6>
         </div>
-        <div class="data">
+        <div class="data" *ngIf="primaries.length > 0">
             <ng-container *ngFor="let p of primaries">
                 <div class="entry align-primaries">
                     <div class="entry-text"><p>{{ p.id }}</p></div>
@@ -28,10 +28,11 @@
                     <div class="entry-text"><a [routerLink]="['/primaries','detail',p.id]" class="button smaller-button">Otros proveedores</a></div>
                     <div class="entry-buttons">
                         <span class="material-symbols-outlined update-button">edit</span>
-                        <span class="material-symbols-outlined delete-button">delete</span>
+                        <span (click)="deletePrimary(p.id)" class="material-symbols-outlined delete-button">delete</span>
                     </div>
                 </div>
             </ng-container>    
         </div>
+        <p class="error-message" *ngIf="primaries.length == 0">No hay Primarios para mostrar</p>
     </div>
 </div>
