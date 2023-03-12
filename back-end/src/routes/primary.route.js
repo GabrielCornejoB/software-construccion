@@ -167,8 +167,6 @@ router.get('/get-primaries', async (req, res) => {
 });
 
 router.get('/get-primary/:id', async (req, res) => {
-    // let primaryId = req.params.id;
-    // if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
     const primaryExists = await primaryModel.findOne({ id: req.params.id });
     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
     primaryId = parseInt(req.params.id);
@@ -183,7 +181,7 @@ router.get('/get-primary/:id', async (req, res) => {
         }
     }]).exec();
     let supplier = "-";
-    if (obj[0].supplierName) {
+    if (obj[0].supplierName.length > 0) {
         supplier = obj[0].supplierName[0].supplier;
     }
     const output = {
@@ -198,12 +196,12 @@ router.get('/get-primary/:id', async (req, res) => {
     return res.status(200).json(output);
 });
 
-router.get('/get-suppliers-of-primary', async (req, res) => {
-    let primaryId = req.query.id;
-    if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
+router.get('/get-suppliers-of-primary/:id', async (req, res) => {
+    let primaryId = req.params.id;
+    // if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
     const primaryExists = await primaryModel.findOne({ id: primaryId }).select('suppliers');
     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
-    if (primaryExists.suppliers.length == 0) return res.status(200).send("Primary has 0 providers");
+    if (primaryExists.suppliers.length == 0) return res.status(400).send("Primary has 0 providers");
     primaryId = parseInt(primaryId);
     const test = await primaryModel.aggregate([
         { $match: { id: primaryId } },

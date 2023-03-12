@@ -12,7 +12,36 @@
         <div class="inline-div"><h2>Proveedor por defecto:</h2><h2 class="text">{{ defaultSupplier }}</h2></div>
     </div>
     <hr>
-    <div class="primary-suppliers">
+    <div class="primary-suppliers" *ngIf="suppliers.length > 0">
         <h2>Proveedores</h2>
+        <div class="suppliers-table">
+            <div class="headings align-suppliers">
+                <h6>Nombre proveedor</h6>
+                <h6>Precio de lista</h6>
+                <h6>% IVA</h6>
+                <h6>% Dcto</h6>
+                <h6>Valor unitario</h6>
+                <h6>Fecha actualización</h6>
+                <h6>Colocar por defecto</h6>
+                <h6></h6>
+            </div>
+            <div class="data">
+                <ng-container *ngFor="let s of suppliers">
+                    <div class="entry align-suppliers">
+                        <div class="entry-text"><p>{{ s.supplier }}</p></div>
+                        <div class="entry-text"><p>$ {{ s.listPrice | number }}</p></div>
+                        <div class="entry-text"><p>{{ s.iva }}%</p></div>
+                        <div class="entry-text"><p>{{ s.discount }}%</p></div>
+                        <div class="entry-text"><p>$ {{ s.unitaryPrice | number }}</p></div>
+                        <div class="entry-text"><p>{{ s.updateDate | date }}</p></div>
+                        <div class="entry-text"><a class="button smaller-button">Colocar por defecto</a></div>
+                        <div class="entry-buttons">
+                            <span class="material-symbols-outlined update-button">edit</span>
+                            <span  class="material-symbols-outlined delete-button">delete</span>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
     </div>
 </div>

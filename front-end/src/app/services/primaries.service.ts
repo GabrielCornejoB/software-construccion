@@ -14,8 +14,8 @@ export class PrimariesService {
   getPrimaries(): Observable<Primary[]> {
     return this.http.get<Primary[]>(this.URL + "/get-primaries");
   }
-  getSuppliersOfPrimary(id: string){
-    return this.http.get<SupplierOfPrimary[]>(this.URL + "/get-suppliers-of-primary/" + id);
+  getSuppliersOfPrimary(id: string): Observable<any> {
+    return this.http.get(this.URL + "/get-suppliers-of-primary/" + id);
   }
   getPrimary(id: string): Observable<any> {
     return this.http.get<Primary>(this.URL + "/get-primary/" + id);
