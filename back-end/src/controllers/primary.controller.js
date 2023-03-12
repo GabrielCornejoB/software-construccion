@@ -127,5 +127,12 @@ exports.getPrimary = async (req, res) => {
 }
 
 exports.deletePrimary = async (req, res) => {
-
+    try {
+        const primaryExists = await Primary.findOne({ id: req.params.id });
+        if (!primaryExists) return res.status(404).send("Primary doesn't exist");
+        await Primary.deleteOne({ id: req.params.id });
+        res.json({msg: "Primary Deleted succesfully"});
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
 }

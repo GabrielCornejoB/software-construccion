@@ -10,6 +10,8 @@ router.get('/get-primary/:id', primaryController.getPrimary);
 
 router.put('/update-primary/:id', primaryController.updatePrimary);
 
+router.delete('/delete-primary/:id', primaryController.deletePrimary);
+
 // router.post('/add-supplier-to-primary', async (req, res) => {
 //     const {primaryId, supplierId, listPrice, iva, discount} = req.body;
 
@@ -69,13 +71,6 @@ router.put('/update-primary/:id', primaryController.updatePrimary);
 //     return res.status(200).send("Default supplier of primary updated succesfully");
 // });
 
-// router.delete('/delete-primary/:id', async (req, res) => {
-//     const primaryExists = await primaryModel.findOne({id: req.params.id});
-//     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
-//     await primaryModel.deleteOne({ id: req.params.id });
-//     res.json({msg: "Primary Deleted succesfully"});
-// });
-
 // router.delete('/delete-supplier-of-primary', async (req, res) => {
 //     const {primaryId, supplierId} = req.body;
 //     if (!primaryId?.toString().trim() || !supplierId?.toString().trim()) return res.status(400).send("Missing fields");
@@ -88,67 +83,6 @@ router.put('/update-primary/:id', primaryController.updatePrimary);
 //     primaryExists.suppliers.splice(index, 1);
 //     await primaryExists.save();
 //     return res.status(200).send("Supplier of primary deleted succesfully");
-// });
-
-// router.get('/get-primaries', async (req, res) => {
-//     const test = await primaryModel.aggregate([{
-//         $lookup: 
-//         {
-//             from: "suppliers",
-//             localField: "defaultSupplier",
-//             foreignField: "id",
-//             as: "supplierName"
-//         }
-//     }]).exec();
-//     const output = [];
-//     for (let obj of test) {
-//         let supplier = "-";
-//         if (obj.supplierName[0]) {
-//             supplier = obj.supplierName[0].supplier;
-//         }
-//         output.push(
-//             {
-//                 id: obj.id,
-//                 primary: obj.primary,
-//                 group: obj.group,
-//                 clasification: obj.clasification,
-//                 unit: obj.unit,
-//                 defaultPrice: obj.defaultPrice,
-//                 defaultSupplier: supplier
-//             }
-//         )
-//     }
-//     return res.status(200).json(output);
-// });
-
-// router.get('/get-primary/:id', async (req, res) => {
-//     const primaryExists = await primaryModel.findOne({ id: req.params.id });
-//     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
-//     primaryId = parseInt(req.params.id);
-//     const obj = await primaryModel.aggregate([
-//         { $match: {id: primaryId} },
-//         { $lookup: 
-//         {
-//             from: "suppliers",
-//             localField: "defaultSupplier",
-//             foreignField: "id",
-//             as: "supplierName"
-//         }
-//     }]).exec();
-//     let supplier = "-";
-//     if (obj[0].supplierName.length > 0) {
-//         supplier = obj[0].supplierName[0].supplier;
-//     }
-//     const output = {
-//         id: obj[0].id,
-//         primary: obj[0].primary,
-//         group: obj[0].group,
-//         clasification: obj[0].clasification,
-//         unit: obj[0].unit,
-//         defaultPrice: obj[0].defaultPrice,
-//         defaultSupplier: supplier
-//     }
-//     return res.status(200).json(output);
 // });
 
 // router.get('/get-suppliers-of-primary/:id', async (req, res) => {
