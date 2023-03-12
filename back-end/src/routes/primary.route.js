@@ -18,26 +18,9 @@ router.get('/get-suppliers-of-primary/:id', primaryController.getSuppliersOfPrim
 
 router.patch('/update-supplier-of-primary/:id/:supplierId', primaryController.updateSupplierOfPrimary);
 
-// router.patch('/update-supplier-of-primary', async (req, res) => {
-//     const { primaryId, supplierId, listPrice, iva, discount } = req.body;
-//     if (!supplierId?.toString().trim() || !listPrice?.toString().trim() || !iva?.toString().trim() || 
-//         !discount?.toString().trim() || !primaryId?.toString().trim()) {
-//         return res.status(400).send('Missing fields');
-//     }   
-//     const primaryIdExists = await primaryModel.findOne({id: primaryId});
-//     if (!primaryIdExists) return res.status(400).send("Primary with id: '" + primaryId + "' doesn't exist");
-//     const suppliersIds = [];
-//     for (let sup of primaryIdExists.suppliers) suppliersIds.push(sup.supplierId);
-//     if (!suppliersIds.includes(supplierId)) return res.status(400).send("Primary doesn't has that supplier");
-//     let index = suppliersIds.indexOf(supplierId);
-//     primaryIdExists.suppliers[index].listPrice = listPrice;
-//     primaryIdExists.suppliers[index].iva = iva;
-//     primaryIdExists.suppliers[index].discount = discount;
-//     primaryIdExists.suppliers[index].unitaryPrice = (listPrice * (1+iva/100)) * (100-discount)/100;
-//     primaryIdExists.suppliers[index].updateDate = new Date();
-//     await primaryIdExists.save();
-//     return res.status(200).send("Supplier updated succesfully");
-// });
+router.patch('/set-default-supplier-of-primary/:id', primaryController.setDefaultSupplierOfPrimary);
+
+router.delete('/delete-supplier-of-primary/:id/:supplierId', primaryController.deleteSupplierOfPrimary);
 
 // router.patch('/set-default-supplier-of-primary', async (req, res) => {
 //     const { primaryId, defaultPrice, defaultSupplier } = req.body;

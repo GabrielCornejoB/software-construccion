@@ -218,3 +218,25 @@ exports.updateSupplierOfPrimary = async (req, res) => {
     }
     
 }
+
+exports.setDefaultSupplierOfPrimary = async (req, res) => {
+    try {
+        const { defaultPrice, defaultSupplier } = req.body;
+        const primaryExists = await Primary.findOne({id: req.params.id});
+        if (!primaryExists) return res.status(404).json({msg: "Primary doesn't exist"});
+        primaryExists.defaultPrice = defaultPrice;
+        primaryExists.defaultSupplier = defaultSupplier;
+        await primaryExists.save();
+        res.json(primaryExists);
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+}
+
+exports.deleteSupplierOfPrimary = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+}
