@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="title">
+        <h1>Crear Primario</h1>
+    </div>
+    <hr>
+    <form class="create-form" [formGroup]="primaryForm" (ngSubmit)="createPrimary()">   
+        <div class="input-div">
+            <label for="primary">Nombre del primario</label>
+            <input class="form-input" id="primary" type="text" formControlName="primary">
+            <ng-container *ngIf="primaryForm.get('primary')?.hasError('required') && primaryForm.get('primary')?.touched">
+                <p class="error-message">El campo "Nombre del primario" es <u><b>obligatorio</b></u></p>
+            </ng-container>
+        </div>
+        <div class="input-div">
+            <label for="group">Grupo</label>
+            <input class="form-input" id="group" type="text" formControlName="group">
+            <!-- <select class="form-input" id="group" type="text"></select> -->
+            <ng-container *ngIf="primaryForm.get('group')?.hasError('required') && primaryForm.get('group')?.touched">
+                <p class="error-message">El campo "Grupo" es <u><b>obligatorio</b></u></p>
+            </ng-container>
+        </div>
+        <div class="input-div">
+            <label for="clasification">Clasificación</label>
+            <input class="form-input" id="clasification" type="text" formControlName="clasification">
+            <!-- <select class="form-input" id="clasification" type="text"></select> -->
+            <ng-container *ngIf="primaryForm.get('clasification')?.hasError('required') && primaryForm.get('clasification')?.touched">
+                <p class="error-message">El campo "Clasificación" es <u><b>obligatorio</b></u></p>
+            </ng-container>
+        </div>
+        <div class="input-div">
+            <label for="unit">Unidad de medida</label>
+            <input class="form-input" id="unit" type="text" formControlName="unit">
+            <!-- <select class="form-input" id="unit" type="text"></select> -->
+            <ng-container *ngIf="primaryForm.get('unit')?.hasError('required') && primaryForm.get('unit')?.touched">
+                <p class="error-message">El campo "Unidad de medida" es <u><b>obligatorio</b></u></p>
+            </ng-container>
+        </div>
+        <div class="input-div">
+            <button type="submit" [disabled]="primaryForm.invalid" class="button submit-button">Agregar Primario</button>
+        </div>
+    </form>
+</div>

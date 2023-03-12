@@ -66,6 +66,7 @@ hr
     font-weight: 700
     text-decoration: none
     text-align: center
+    cursor: pointer
     transition: 0.6s
     &.bigger-button
         padding: 15px 30px
@@ -77,6 +78,17 @@ hr
         font-size: 0.8rem
     &:hover
         transform: scale(1.1)
+    &.submit-button
+        padding: 15px 30px
+        border-radius: 35px
+        font-size: 1.2rem
+        border: none
+        &:disabled
+            background: var(--gray)
+            &:hover
+                transform: none
+                cursor: not-allowed
+            
 
 .entry
     display: grid
@@ -85,3 +97,6 @@ hr
     border-radius: 10px
     box-shadow: 0 1px 4px rgba(0,0,0,0.25)
     
+.error-message
+    font-weight: 600
+    color: var(--red)

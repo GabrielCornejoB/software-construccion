@@ -7,18 +7,22 @@ import { HomeComponent } from './components/home/home.component';
 import { PrimariesMainComponent } from './components/primaries/primaries-main/primaries-main.component';
 import { PrimariesDetailComponent } from './components/primaries/primaries-detail/primaries-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PrimariesCreateComponent } from './components/primaries/primaries-create/primaries-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PrimariesMainComponent,
-    PrimariesDetailComponent
+    PrimariesDetailComponent,
+    PrimariesCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
