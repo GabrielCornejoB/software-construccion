@@ -1,25 +1,25 @@
 export interface Primary {
-    id: Number,
-    primary: String,
-    group: String,
-    clasification: String,
-    unit: String,
-    defaultPrice: Number,
-    defaultSupplier: Number,
+    id: number,
+    primary: string,
+    group: string,
+    clasification: string,
+    unit: string,
+    defaultPrice: number,
+    defaultSupplier: number,
     suppliers: [{
-        supplierId: Number,
-        listPrice: Number,
-        iva: Number,
-        discount: Number,
-        unitaryPrice: Number,
+        supplierId: number,
+        listPrice: number,
+        iva: number,
+        discount: number,
+        unitaryPrice: number,
         updateDate: Date
     }]
 }
 export interface SupplierOfPrimary {
-    supplierId: Number,
-    listPrice: Number,
-    iva: Number,
-    discount: Number,
-    unitaryPrice: Number,
+    supplierId: number,
+    listPrice: number,
+    iva: number,
+    discount: number,
+    unitaryPrice: number,
     updateDate: Date
 }

@@ -137,8 +137,6 @@ router.delete('/delete-supplier-of-primary', async (req, res) => {
 });
 
 router.get('/get-primaries', async (req, res) => {
-    // const primaries = await primaryModel.find().select('id primary group clasification unit defaultPrice defaultSupplier');
-    // if (!primaries) return res.status(400).send("Empty collection");
     const test = await primaryModel.aggregate([{
         $lookup: 
         {
@@ -150,6 +148,10 @@ router.get('/get-primaries', async (req, res) => {
     }]).exec();
     const output = [];
     for (let obj of test) {
+        let supplier = "-";
+        if (obj.supplierName[0]) {
+            supplier = obj.supplierName[0].supplier;
+        }
         output.push(
             {
                 id: obj.id,
@@ -158,14 +160,46 @@ router.get('/get-primaries', async (req, res) => {
                 clasification: obj.clasification,
                 unit: obj.unit,
                 defaultPrice: obj.defaultPrice,
-                defaultSupplier: obj.supplierName[0].supplier
+                defaultSupplier: supplier
             }
         )
     }
     return res.status(200).json(output);
 });
 
-router.get('/get-primary-with-suppliers', async (req, res) => {
+router.get('/get-primary', async (req, res) => {
+    let primaryId = req.query.id;
+    if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
+    const primaryExists = await primaryModel.findOne({ id: primaryId });
+    if (!primaryExists) return res.status(400).send("Primary doesn't exist");
+    primaryId = parseInt(primaryId);
+    const obj = await primaryModel.aggregate([
+        { $match: {id: primaryId} },
+        { $lookup: 
+        {
+            from: "suppliers",
+            localField: "defaultSupplier",
+            foreignField: "id",
+            as: "supplierName"
+        }
+    }]).exec();
+    let supplier = "-";
+    if (obj[0].supplierName) {
+        supplier = obj[0].supplierName[0].supplier;
+    }
+    const output = [{
+        id: obj[0].id,
+        primary: obj[0].primary,
+        group: obj[0].group,
+        clasification: obj[0].clasification,
+        unit: obj[0].unit,
+        defaultPrice: obj[0].defaultPrice,
+        defaultSupplier: supplier
+    }]
+    return res.status(200).json(output);
+});
+
+router.get('/get-suppliers-of-primary', async (req, res) => {
     let primaryId = req.query.id;
     if (!primaryId?.toString().trim()) return res.status(400).send("Missing param");
     const primaryExists = await primaryModel.findOne({ id: primaryId }).select('suppliers');

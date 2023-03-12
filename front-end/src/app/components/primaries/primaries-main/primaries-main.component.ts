@@ -8,20 +8,15 @@ import { Primary } from 'src/app/types/Primary';
   styleUrls: ['./primaries-main.component.sass']
 })
 export class PrimariesMainComponent implements OnInit  {
+  primaries: Primary[] = [];
   constructor(private primariesService: PrimariesService) {}
 
-  primaries: Primary[] = [];
-
   ngOnInit(): void {
-    this.primariesService.getPrimaries().subscribe(
-      res => {
-        this.primaries = res;
-        console.log(this.primaries);
-      },
-      err => {
-        console.log(err);
-      }
-    )
+    this.getPrimaries();
   }
-
+  getPrimaries(): void {
+    this.primariesService.getPrimaries().subscribe(primaries => {
+      this.primaries = primaries
+    });
+  }
 }

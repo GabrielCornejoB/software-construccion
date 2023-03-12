@@ -23,7 +23,7 @@
                     <div class="entry-text"><p>{{ p.group }}</p></div>
                     <div class="entry-text"><p>{{ p.clasification }}</p></div>
                     <div class="entry-text"><p>{{ p.unit }}</p></div>
-                    <div class="entry-text"><p>{{ p.defaultPrice }}</p></div>
+                    <div class="entry-text"><p>$ {{ p.defaultPrice | number}} </p></div>
                     <div class="entry-text"><p>{{ p.defaultSupplier }}</p></div>
                     <div class="entry-text"><a [routerLink]="['/primaries','detail',p.id]" class="button smaller-button">Otros proveedores</a></div>
                     <div class="entry-buttons">
