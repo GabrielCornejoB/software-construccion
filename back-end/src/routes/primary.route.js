@@ -186,7 +186,7 @@ router.get('/get-primary/:id', async (req, res) => {
     if (obj[0].supplierName) {
         supplier = obj[0].supplierName[0].supplier;
     }
-    const output = [{
+    const output = {
         id: obj[0].id,
         primary: obj[0].primary,
         group: obj[0].group,
@@ -194,7 +194,7 @@ router.get('/get-primary/:id', async (req, res) => {
         unit: obj[0].unit,
         defaultPrice: obj[0].defaultPrice,
         defaultSupplier: supplier
-    }]
+    }
     return res.status(200).json(output);
 });
 
