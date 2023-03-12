@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PrimariesService } from 'src/app/services/primaries.service';
 import { Primary } from 'src/app/types/Primary';
 
 @Component({
@@ -11,7 +12,7 @@ import { Primary } from 'src/app/types/Primary';
 export class PrimariesCreateComponent {
   primaryForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private primariesService: PrimariesService) {
     this.primaryForm = this.fb.group({ 
       primary: ['', Validators.required],
       group: ['', Validators.required],
@@ -28,7 +29,12 @@ export class PrimariesCreateComponent {
       clasification: this.primaryForm.get('clasification')?.value,
       unit: this.primaryForm.get('unit')?.value
     };
-    console.log(primary);
-    this.router.navigate(['/']);
+    this.primariesService.createPrimary(primary).subscribe(data => {
+      this.router.navigate(['/primaries']);
+    }, error => {
+      console.log(error);
+      this.primaryForm.reset();
+    })
+    
   }
 }

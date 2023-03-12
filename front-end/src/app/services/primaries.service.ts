@@ -21,6 +21,10 @@ export class PrimariesService {
     return this.http.get<Primary>(this.URL + "/get-primary/" + id);
   }
 
+  createPrimary(primary: Primary): Observable<any>{
+    return this.http.post(this.URL + "/add-primary/", primary);
+  }
+
   deletePrimary(id: string): Observable<any> {
     return this.http.delete(this.URL + "/delete-primary/" + id);
   }

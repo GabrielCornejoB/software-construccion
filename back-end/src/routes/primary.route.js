@@ -32,7 +32,8 @@ router.post('/add-primary', async (req, res) => {
         defaultSupplier: 0
     });
     await newPrimary.save();
-    return res.status(200).send("'" + primary + "' added succesfully");
+    let answerString = "'" + primary + "' added succesfully";
+    res.json({ msg: answerString });
 });
 
 router.post('/add-supplier-to-primary', async (req, res) => {
