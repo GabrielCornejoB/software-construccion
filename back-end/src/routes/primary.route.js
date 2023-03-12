@@ -117,7 +117,7 @@ router.delete('/delete-primary/:id', async (req, res) => {
     const primaryExists = await primaryModel.findOne({id: req.params.id});
     if (!primaryExists) return res.status(400).send("Primary doesn't exist");
     await primaryModel.deleteOne({ id: req.params.id });
-    return res.status(200).send("Primary deleted succesfully");
+    res.json({msg: "Primary Deleted succesfully"});
 });
 
 router.delete('/delete-supplier-of-primary', async (req, res) => {

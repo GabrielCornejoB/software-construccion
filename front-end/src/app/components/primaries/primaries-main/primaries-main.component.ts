@@ -24,7 +24,7 @@ export class PrimariesMainComponent implements OnInit  {
   }
   deletePrimary(id: any): void {
     this.primariesService.deletePrimary(id).subscribe(data => {
-      console.log("Eliminado con exito");
+      this.getPrimaries();
     }, error => {
       console.log(error);
     })
