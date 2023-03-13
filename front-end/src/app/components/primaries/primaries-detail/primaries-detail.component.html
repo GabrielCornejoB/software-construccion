@@ -12,9 +12,10 @@
         <div class="inline-div"><h2>Proveedor por defecto:</h2><h2 class="text">{{ defaultSupplier }}</h2></div>
     </div>
     <hr>
-    <div class="primary-suppliers" *ngIf="suppliers.length > 0">
+    <div class="primary-suppliers">
         <h2>Proveedores</h2>
-        <div class="suppliers-table">
+        <p class="error-message" *ngIf="suppliers.length == 0">Este Primario tiene 0 proveedores</p>
+        <div class="suppliers-table" *ngIf="suppliers.length > 0">
             <div class="headings align-suppliers">
                 <h6>Nombre proveedor</h6>
                 <h6>Precio de lista</h6>

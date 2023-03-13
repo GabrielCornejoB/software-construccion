@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PrimariesService } from 'src/app/services/primaries.service';
 import { Primary } from 'src/app/types/Primary';
+import { Units } from 'src/app/enums/units.enum';
+import { Groups } from 'src/app/enums/groups.enum';
+import { Clasifications } from 'src/app/enums/clasifications.enum';
 
 @Component({
   selector: 'app-primaries-create',
@@ -11,6 +14,9 @@ import { Primary } from 'src/app/types/Primary';
 })
 export class PrimariesCreateComponent {
   primaryForm: FormGroup;
+  units = Object.values(Units);
+  groups = Object.values(Groups);
+  clasifications = Object.values(Clasifications);
 
   constructor(private fb: FormBuilder, private router: Router, private primariesService: PrimariesService) {
     this.primaryForm = this.fb.group({ 

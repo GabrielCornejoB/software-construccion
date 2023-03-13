@@ -13,24 +13,27 @@
         </div>
         <div class="input-div">
             <label for="group">Grupo</label>
-            <input class="form-input" id="group" type="text" formControlName="group">
-            <!-- <select class="form-input" id="group" type="text"></select> -->
+            <select class="form-input" id="group" name="group" formControlName="group">
+                <option *ngFor="let g of groups" [value]="g">{{ g }}</option>
+            </select>
             <ng-container *ngIf="primaryForm.get('group')?.hasError('required') && primaryForm.get('group')?.touched">
                 <p class="error-message">El campo "Grupo" es <u><b>obligatorio</b></u></p>
             </ng-container>
         </div>
         <div class="input-div">
             <label for="clasification">Clasificación</label>
-            <input class="form-input" id="clasification" type="text" formControlName="clasification">
-            <!-- <select class="form-input" id="clasification" type="text"></select> -->
+            <select class="form-input" id="clasification" name="clasification" formControlName="clasification">
+                <option *ngFor="let c of clasifications" [value]="c">{{ c }}</option>
+            </select>
             <ng-container *ngIf="primaryForm.get('clasification')?.hasError('required') && primaryForm.get('clasification')?.touched">
                 <p class="error-message">El campo "Clasificación" es <u><b>obligatorio</b></u></p>
             </ng-container>
         </div>
         <div class="input-div">
             <label for="unit">Unidad de medida</label>
-            <input class="form-input" id="unit" type="text" formControlName="unit">
-            <!-- <select class="form-input" id="unit" type="text"></select> -->
+            <select class="form-input" id="unit" name="unit" formControlName="unit">
+                <option *ngFor="let u of units" [value]="u">{{ u }}</option>
+            </select>
             <ng-container *ngIf="primaryForm.get('unit')?.hasError('required') && primaryForm.get('unit')?.touched">
                 <p class="error-message">El campo "Unidad de medida" es <u><b>obligatorio</b></u></p>
             </ng-container>
