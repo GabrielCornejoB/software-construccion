@@ -27,7 +27,7 @@
                     <div class="entry-text"><p>{{ p.defaultSupplier }}</p></div>
                     <div class="entry-text"><a [routerLink]="['/primaries','detail',p.id]" class="button smaller-button">Otros proveedores</a></div>
                     <div class="entry-buttons">
-                        <span class="material-symbols-outlined update-button">edit</span>
+                        <a [routerLink]="['/primaries','update', p.id]" style="transition: 0.6s"><span class="material-symbols-outlined update-button">edit</span></a>
                         <span (click)="deletePrimary(p.id)" class="material-symbols-outlined delete-button">delete</span>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PrimariesMainComponent } from './components/primaries/primaries-main/primaries-main.component';
 import { PrimariesDetailComponent } from './components/primaries/primaries-detail/primaries-detail.component';
 import { PrimariesCreateComponent } from './components/primaries/primaries-create/primaries-create.component';
+import { PrimariesUpdateComponent } from './components/primaries/primaries-update/primaries-update.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PrimariesCreateComponent } from './components/primaries/primaries-creat
     HomeComponent,
     PrimariesMainComponent,
     PrimariesDetailComponent,
-    PrimariesCreateComponent
+    PrimariesCreateComponent,
+    PrimariesUpdateComponent
   ],
   imports: [
     BrowserModule,

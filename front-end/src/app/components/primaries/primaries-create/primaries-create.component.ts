@@ -40,7 +40,6 @@ export class PrimariesCreateComponent {
     }, error => {
       console.log(error);
       this.primaryForm.reset();
-    })
-    
+    });  
   }
 }
