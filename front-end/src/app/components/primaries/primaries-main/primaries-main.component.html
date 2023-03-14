@@ -4,7 +4,7 @@
         <a class="button bigger-button" routerLink="/primaries/create">Agregar Primario</a>
     </div>
     <hr>
-    <div class="primaries-table">
+    <div class="primaries-table" *ngIf="primaries.length > 0">
         <div class="headings align-primaries">
             <h6>ID</h6>
             <h6>Nombre</h6>
@@ -13,9 +13,9 @@
             <h6>Unidad</h6>
             <h6>Valor unitario</h6>
             <h6>Proveedor</h6>
-            <h6>Otros proveedores</h6>
+            <h6>Ver proveedores</h6>
         </div>
-        <div class="data" *ngIf="primaries.length > 0">
+        <div class="data">
             <ng-container *ngFor="let p of primaries">
                 <div class="entry align-primaries">
                     <div class="entry-text"><p>{{ p.id }}</p></div>
@@ -25,7 +25,7 @@
                     <div class="entry-text"><p>{{ p.unit }}</p></div>
                     <div class="entry-text"><p>$ {{ p.defaultPrice | number}} </p></div>
                     <div class="entry-text"><p>{{ p.defaultSupplier }}</p></div>
-                    <div class="entry-text"><a [routerLink]="['/primaries','detail',p.id]" class="button smaller-button">Otros proveedores</a></div>
+                    <div class="entry-text"><a [routerLink]="['/primaries','detail',p.id]" class="button smaller-button">Ver proveedores</a></div>
                     <div class="entry-buttons">
                         <a [routerLink]="['/primaries','update', p.id]" style="transition: 0.6s"><span class="material-symbols-outlined update-button">edit</span></a>
                         <span (click)="deletePrimary(p.id)" class="material-symbols-outlined delete-button">delete</span>
@@ -33,6 +33,6 @@
                 </div>
             </ng-container>    
         </div>
-        <p class="error-message" *ngIf="primaries.length == 0">No hay Primarios para mostrar</p>
     </div>
+    <p class="error-message" *ngIf="primaries.length == 0">No hay Primarios para mostrar</p>
 </div>

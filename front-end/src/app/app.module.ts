@@ -11,6 +11,7 @@ import { PrimariesMainComponent } from './components/primaries/primaries-main/pr
 import { PrimariesDetailComponent } from './components/primaries/primaries-detail/primaries-detail.component';
 import { PrimariesCreateComponent } from './components/primaries/primaries-create/primaries-create.component';
 import { PrimariesUpdateComponent } from './components/primaries/primaries-update/primaries-update.component';
+import { PrimariesAddSupplierComponent } from './components/primaries/primaries-add-supplier/primaries-add-supplier.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PrimariesUpdateComponent } from './components/primaries/primaries-updat
     PrimariesMainComponent,
     PrimariesDetailComponent,
     PrimariesCreateComponent,
-    PrimariesUpdateComponent
+    PrimariesUpdateComponent,
+    PrimariesAddSupplierComponent,
   ],
   imports: [
     BrowserModule,

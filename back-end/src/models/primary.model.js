@@ -5,7 +5,7 @@ const primarySchema = new Schema(
         id: {type: Number, required: true},
         primary: {type: String, required: true},
         group: {type: String, required: true, 
-            enum: ["DIseños", "Ensayos", "Equipos", "Herramientas", "M.O.", "Materiales", "Polimericos", "Servicios", "Subcontratos", "Subproductos", "Transportes"]},
+            enum: ["Diseños", "Ensayos", "Equipos", "Herramientas", "M.O.", "Materiales", "Polimericos", "Servicios", "Subcontratos", "Subproductos", "Transportes"]},
         clasification: {type: String, required: true, 
             enum: ["Aceros", "Aditivos", "Argos", "Áridos", "Herrajes", "Maderas", "Mezclas", "Prefabricados", "Premezclados", "PVC", "Transportes"]},
         unit: {type: String, required: true, 

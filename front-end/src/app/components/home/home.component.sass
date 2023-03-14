@@ -1,0 +1,35 @@
+.home-logo
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-bottom: 200px
+    .logo-icon-size
+        font-size: 10rem
+.home-links
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    gap: 40px
+    .home-card
+        display: flex
+        flex-direction: column
+        justify-content: space-evenly
+        align-items: center
+        background: var(--white)
+        border-radius: 10px
+        padding: 20px
+        height: 300px
+        width: 200px
+        color: var(--gray)
+        transition: 0.6s
+        text-decoration: none
+        .card-text
+            font-size: 1.25rem
+            font-weight: 800
+        .card-icon-size
+            font-size: 7.5rem
+        &:hover
+            background: var(--blue)   
+            cursor: pointer 
+            color: var(--white)
