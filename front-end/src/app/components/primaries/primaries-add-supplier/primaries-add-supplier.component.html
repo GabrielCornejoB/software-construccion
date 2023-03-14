@@ -1,1 +1,30 @@
-<p>primaries-add-supplier works!</p>
+<div class="container">
+    <div class="title">
+        <h1>Agregar proveedor a "Primario"</h1>
+        <a [routerLink]="['/primaries', 'detail', id]" class="button bigger-button back-button">Volver</a>
+    </div>
+    <hr>
+    <form class="create-form">
+        <div class="input-div">
+            <label for="supplier">Proveedor</label>
+            <select class="form-input" name="supplier" id="supplier"></select>
+        </div>
+        <div class="input-div">
+            <label for="precio-lista">Precio de lista</label>
+            <input class="form-input" id="precio-lista" type="text">
+        </div>
+        <div class="double-input-div">
+            <div class="smaller-input-div">
+                <label for="iva">% IVA</label>
+                <input class="form-input" id="iva" type="text">
+            </div>
+            <div class="smaller-input-div">
+                <label for="descuento">% Descuento</label>
+                <input class="form-input" id="descuento" type="text">
+            </div>
+        </div>
+        <div class="input-div">
+            <button class="button submit-button">Agregar proveedor a primario</button>
+        </div>
+    </form>
+</div>

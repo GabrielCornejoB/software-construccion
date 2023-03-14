@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const counterModel = require('../models/counter.model');
 const supplierModel = require('../models/supplier.model');
+const supplierController = require('../controllers/supplier.controller');
 
 router.post('/add-supplier', async (req, res) => {
     const { supplier } = req.body;
@@ -22,11 +23,12 @@ router.post('/add-supplier', async (req, res) => {
     return res.status(200).send("'" + supplier + "' added succesfully");
 });
 
-router.get('/get-suppliers', async (req, res) => {
-    const suppliers = await supplierModel.find();
-    if (!suppliers) return res.status(400).send("Empty collection");
-    return res.status(200).json(suppliers);
-});
+// router.get('/get-suppliers', async (req, res) => {
+//     const suppliers = await supplierModel.find();
+//     if (!suppliers) return res.status(400).send("Empty collection");
+//     return res.status(200).json(suppliers);
+// });
+router.get('/get-suppliers', supplierController.getSuppliers);
 
 router.put('/update-supplier', async (req, res) => {
     const { id, supplier } = req.body;

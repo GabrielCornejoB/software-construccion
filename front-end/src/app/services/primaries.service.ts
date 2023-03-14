@@ -29,4 +29,7 @@ export class PrimariesService {
   updatePrimary(id: string, primary: Primary): Observable<any> {
     return this.http.put(this.URL + "/update-primary/" + id, primary);
   }
+  addSupplierToPrimary(id: string, supplier: SupplierOfPrimary): Observable<any> {
+    return this.http.post(this.URL + "/add-supplier-to-primary/" + id + "/" + supplier.supplierId, supplier);
+  }
 }

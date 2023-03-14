@@ -1,7 +1,7 @@
 <div class="container">
     <div class="title">
         <h1>Primario "{{ primary }}"</h1>
-        <a class="button bigger-button" routerLink="">Agregar Proveedor</a>
+        <a class="button bigger-button" [routerLink]="['/primaries', 'add-supplier', id]">Agregar Proveedor</a>
     </div>
     <hr>
     <div class="primary-details">
