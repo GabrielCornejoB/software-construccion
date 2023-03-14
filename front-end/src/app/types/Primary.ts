@@ -1,10 +1,10 @@
 export class SupplierOfPrimary {
-    supplierId: number;
+    supplierId?: number;
     listPrice: number;
     iva: number;
     discount: number;
-    unitaryPrice: number;
-    updateDate: Date;
+    unitaryPrice?: number;
+    updateDate?: Date;
 
     constructor(supplierId: number, listPrice: number, iva: number, discount: number, unitaryPrice: number, updateDate: Date) {
         this.supplierId = supplierId;

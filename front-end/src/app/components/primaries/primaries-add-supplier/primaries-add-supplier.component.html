@@ -1,30 +1,44 @@
 <div class="container">
     <div class="title">
-        <h1>Agregar proveedor a "Primario"</h1>
+        <h1>Agregar proveedor a "{{primary}}"</h1>
         <a [routerLink]="['/primaries', 'detail', id]" class="button bigger-button back-button">Volver</a>
     </div>
     <hr>
-    <form class="create-form">
+    <form class="create-form" [formGroup]="supplierForm" (ngSubmit)="addSupplierToPrimary()">
         <div class="input-div">
             <label for="supplier">Proveedor</label>
-            <select class="form-input" name="supplier" id="supplier"></select>
+            <select class="form-input" name="supplier" id="supplier" formControlName="supplierId">
+                <option *ngFor="let s of suppliers" [value]="s.id">{{ s.supplier }}</option>
+            </select>
+            <ng-container *ngIf="supplierForm.get('supplierId')?.hasError('required') && supplierForm.get('supplierId')?.touched">
+                <p class="error-message">El campo "Proveedor" es <u><b>obligatorio</b></u></p>
+            </ng-container>
         </div>
         <div class="input-div">
             <label for="precio-lista">Precio de lista</label>
-            <input class="form-input" id="precio-lista" type="text">
+            <input class="form-input" id="precio-lista" type="number" formControlName="listPrice">
+            <ng-container *ngIf="supplierForm.get('listPrice')?.hasError('required') && supplierForm.get('listPrice')?.touched">
+                <p class="error-message">El campo "Precio de lista" es <u><b>obligatorio</b></u></p>
+            </ng-container>
         </div>
         <div class="double-input-div">
             <div class="smaller-input-div">
                 <label for="iva">% IVA</label>
-                <input class="form-input" id="iva" type="text">
+                <input class="form-input" id="iva" type="number" formControlName="iva">
+                <ng-container *ngIf="supplierForm.get('iva')?.hasError('required') && supplierForm.get('iva')?.touched">
+                    <p class="error-message">El campo "% IVA" es <u><b>obligatorio</b></u></p>
+                </ng-container>
             </div>
             <div class="smaller-input-div">
                 <label for="descuento">% Descuento</label>
-                <input class="form-input" id="descuento" type="text">
+                <input class="form-input" id="descuento" type="number" formControlName="discount">
+                <ng-container *ngIf="supplierForm.get('discount')?.hasError('required') && supplierForm.get('discount')?.touched">
+                    <p class="error-message">El campo "% Descuento" es <u><b>obligatorio</b></u></p>
+                </ng-container>
             </div>
         </div>
         <div class="input-div">
-            <button class="button submit-button">Agregar proveedor a primario</button>
+            <button type="submit" [disabled]="supplierForm.invalid" class="button submit-button">Agregar proveedor a primario</button>
         </div>
     </form>
 </div>
