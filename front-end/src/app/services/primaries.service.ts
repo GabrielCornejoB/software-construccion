@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Primary, SupplierOfPrimary } from '../types/Primary';
+import { DefaultSupplier, Primary, SupplierOfPrimary } from '../types/Primary';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -31,5 +31,8 @@ export class PrimariesService {
   }
   addSupplierToPrimary(id: string, supplier: SupplierOfPrimary): Observable<any> {
     return this.http.post(this.URL + "/add-supplier-to-primary/" + id + "/" + supplier.supplierId, supplier);
+  }
+  setDefaultSupplierOfPrimary(id: string, defaultSupplier: DefaultSupplier): Observable<any> {
+    return this.http.patch(this.URL + "/set-default-supplier-of-Primary/" + id, defaultSupplier);
   }
 }

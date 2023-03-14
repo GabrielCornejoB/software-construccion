@@ -183,6 +183,7 @@ exports.getSuppliersOfPrimary = async (req, res) => {
         const output = [];
         for (let obj of test) {
             output.push({
+                supplierId: obj.suppliers.supplierId,
                 supplier: obj.suppliers.supplier[0].supplier,
                 listPrice: obj.suppliers.listPrice,
                 iva: obj.suppliers.iva,

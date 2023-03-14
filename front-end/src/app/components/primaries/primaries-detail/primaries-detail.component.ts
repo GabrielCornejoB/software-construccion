@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PrimariesService } from 'src/app/services/primaries.service';
-import { Primary, SupplierOfPrimary } from 'src/app/types/Primary';
+import { DefaultSupplier, Primary, SupplierOfPrimary } from 'src/app/types/Primary';
 
 @Component({
   selector: 'app-primaries-detail',
@@ -44,6 +44,7 @@ export class PrimariesDetailComponent implements OnInit {
       this.primariesService.getSuppliersOfPrimary(this.id).subscribe(data => {
         for (let obj of data) {
           let tmpObj = {
+            supplierId: obj.supplierId,
             supplier: obj.supplier,
             listPrice: obj.listPrice,
             iva: obj.iva,
@@ -54,6 +55,20 @@ export class PrimariesDetailComponent implements OnInit {
           this.suppliers.push(tmpObj);
         }    
       });
+      console.log(this.suppliers);
+    }
+  }
+  setDefaultSupplier(defaultSupplier: number, defaultPrice: number) {
+    if (this.id !== null) {
+      const defaultSupplierObj: DefaultSupplier = {
+        defaultPrice: defaultPrice,
+        defaultSupplier: defaultSupplier
+      } 
+      this.primariesService.setDefaultSupplierOfPrimary(this.id, defaultSupplierObj).subscribe(data => {
+        this.getPrimary();
+      }, error => {
+        console.log(error);
+      })
     }
   }
 }

@@ -8,7 +8,7 @@
         <div class="inline-div"><h2>Grupo:</h2><h2 class="text">{{ group }}</h2></div>
         <div class="inline-div"><h2>Clasificación:</h2><h2 class="text">{{ clasification }}</h2></div>
         <div class="inline-div"><h2>Unidad:</h2><h2 class="text">{{ unit }}</h2></div>
-        <div class="inline-div"><h2>Valor por defecto:</h2><h2 class="text">$ {{ defaultPrice }}</h2></div>
+        <div class="inline-div"><h2>Valor por defecto:</h2><h2 class="text">$ {{ defaultPrice | number}}</h2></div>
         <div class="inline-div"><h2>Proveedor por defecto:</h2><h2 class="text">{{ defaultSupplier }}</h2></div>
     </div>
     <hr>
@@ -35,7 +35,7 @@
                         <div class="entry-text"><p>{{ s.discount }}%</p></div>
                         <div class="entry-text"><p>$ {{ s.unitaryPrice | number }}</p></div>
                         <div class="entry-text"><p>{{ s.updateDate | date }}</p></div>
-                        <div class="entry-text"><a class="button smaller-button">Colocar por defecto</a></div>
+                        <div class="entry-text"><button (click)="setDefaultSupplier(s.supplierId, s.unitaryPrice)" class="button smaller-button">Colocar por defecto</button></div>
                         <div class="entry-buttons">
                             <span class="material-symbols-outlined update-button">edit</span>
                             <span  class="material-symbols-outlined delete-button">delete</span>

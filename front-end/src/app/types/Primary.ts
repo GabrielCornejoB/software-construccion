@@ -15,6 +15,15 @@ export class SupplierOfPrimary {
         this.updateDate = updateDate;
     }
 }
+export class DefaultSupplier {
+    defaultPrice: number;
+    defaultSupplier: number;
+
+    constructor(defaultPrice: number, defaultSupplier: number) {
+        this.defaultPrice = defaultPrice;
+        this.defaultSupplier = defaultSupplier;
+    }
+}
 export class Primary {
     id?: number;
     primary: string;
