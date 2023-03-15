@@ -41,6 +41,7 @@ export class PrimariesDetailComponent implements OnInit {
   }
   getSuppliers() {
     if (this.id !== null) {
+      const tmpSupplierArray: any[] = [];
       this.primariesService.getSuppliersOfPrimary(this.id).subscribe(data => {
         for (let obj of data) {
           let tmpObj = {
@@ -52,9 +53,10 @@ export class PrimariesDetailComponent implements OnInit {
             unitaryPrice: obj.unitaryPrice,
             updateDate: obj.updateDate
           }
-          this.suppliers.push(tmpObj);
+          tmpSupplierArray.push(tmpObj);
         }    
       });
+      this.suppliers = tmpSupplierArray;
       console.log(this.suppliers);
     }
   }
@@ -66,6 +68,16 @@ export class PrimariesDetailComponent implements OnInit {
       } 
       this.primariesService.setDefaultSupplierOfPrimary(this.id, defaultSupplierObj).subscribe(data => {
         this.getPrimary();
+      }, error => {
+        console.log(error);
+      })
+    }
+  }
+  deleteSupplierOfPrimary(supplierId: string) {
+    if (this.id !== null) {
+      this.primariesService.deleteSupplierOfPrimary(this.id, supplierId).subscribe(data => {
+        this.getPrimary();
+        this.getSuppliers();
       }, error => {
         console.log(error);
       })

@@ -38,7 +38,7 @@
                         <div class="entry-text"><button (click)="setDefaultSupplier(s.supplierId, s.unitaryPrice)" class="button smaller-button">Colocar por defecto</button></div>
                         <div class="entry-buttons">
                             <span class="material-symbols-outlined update-button">edit</span>
-                            <span  class="material-symbols-outlined delete-button">delete</span>
+                            <span (click)="deleteSupplierOfPrimary(s.supplierId)" class="material-symbols-outlined delete-button">delete</span>
                         </div>
                     </div>
                 </ng-container>

@@ -33,6 +33,9 @@ export class PrimariesService {
     return this.http.post(this.URL + "/add-supplier-to-primary/" + id + "/" + supplier.supplierId, supplier);
   }
   setDefaultSupplierOfPrimary(id: string, defaultSupplier: DefaultSupplier): Observable<any> {
-    return this.http.patch(this.URL + "/set-default-supplier-of-Primary/" + id, defaultSupplier);
+    return this.http.patch(this.URL + "/set-default-supplier-of-primary/" + id, defaultSupplier);
+  }
+  deleteSupplierOfPrimary(id: string, supplierId: string): Observable<any> {
+    return this.http.delete(this.URL + "/delete-supplier-of-primary/" + id + "/" + supplierId);
   }
 }
