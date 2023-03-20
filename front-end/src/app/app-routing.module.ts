@@ -10,6 +10,7 @@ import { PrimariesMainComponent } from './components/primaries/primaries-main/pr
 import { PrimariesUpdateSupplierComponent } from './components/primaries/primaries-update-supplier/primaries-update-supplier.component';
 import { PrimariesUpdateComponent } from './components/primaries/primaries-update/primaries-update.component';
 import { SubproductsMainComponent } from './components/subproducts/subproducts-main/subproducts-main.component';
+import { SuppliersCreateComponent } from './components/suppliers/suppliers-create/suppliers-create.component';
 import { SuppliersMainComponent } from './components/suppliers/suppliers-main/suppliers-main.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path:"budgets", component: BudgetsMainComponent},
   {path:"constructions", component:ConstructionsMainComponent},
   {path:"suppliers", component:SuppliersMainComponent},
+  {path:"suppliers/create", component:SuppliersCreateComponent},
   {path:"**", redirectTo: '', pathMatch: 'full'}
 ];
 
