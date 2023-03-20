@@ -38,4 +38,7 @@ export class PrimariesService {
   deleteSupplierOfPrimary(id: string, supplierId: string): Observable<any> {
     return this.http.delete(this.URL + "/delete-supplier-of-primary/" + id + "/" + supplierId);
   }
+  updateSupplierOfPrimary(id: string, supplierId: string, supplier: SupplierOfPrimary): Observable<any> {
+    return this.http.patch(this.URL + "/update-supplier-of-primary/" + id + "/" + supplierId, supplier);
+  }
 }

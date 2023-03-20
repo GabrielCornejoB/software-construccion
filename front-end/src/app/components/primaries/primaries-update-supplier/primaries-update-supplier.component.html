@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="title">
+        <h1>Actualizar proveedor</h1>
+        <a [routerLink]="['/primaries', 'detail', id]" class="button bigger-button back-button">Volver</a>
+    </div>
+    <hr>
+    <form class="create-form" [formGroup]="supplierForm" (ngSubmit)="updateSupplier()">
+        <div class="input-div">
+            <label for="precio-lista">Precio de lista</label>
+            <input class="form-input" id="precio-lista" type="number" formControlName="listPrice">
+            <ng-container *ngIf="supplierForm.get('listPrice')?.hasError('required') && supplierForm.get('listPrice')?.touched">
+                <p class="error-message">El campo "Precio de lista" es <u><b>obligatorio</b></u></p>
+            </ng-container>
+        </div>
+        <div class="double-input-div">
+            <div class="smaller-input-div">
+                <label for="iva">% IVA</label>
+                <input class="form-input" id="iva" type="number" formControlName="iva">
+                <ng-container *ngIf="supplierForm.get('iva')?.hasError('required') && supplierForm.get('iva')?.touched">
+                    <p class="error-message">El campo "% IVA" es <u><b>obligatorio</b></u></p>
+                </ng-container>
+            </div>
+            <div class="smaller-input-div">
+                <label for="descuento">% Descuento</label>
+                <input class="form-input" id="descuento" type="number" formControlName="discount">
+                <ng-container *ngIf="supplierForm.get('discount')?.hasError('required') && supplierForm.get('discount')?.touched">
+                    <p class="error-message">El campo "% Descuento" es <u><b>obligatorio</b></u></p>
+                </ng-container>
+            </div>
+        </div>
+        <div class="input-div">
+            <button type="submit" [disabled]="supplierForm.invalid" class="button submit-button">Actualizar proveedor de primario</button>
+        </div>
+    </form>
+</div>

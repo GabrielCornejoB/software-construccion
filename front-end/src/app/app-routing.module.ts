@@ -5,6 +5,7 @@ import { PrimariesAddSupplierComponent } from './components/primaries/primaries-
 import { PrimariesCreateComponent } from './components/primaries/primaries-create/primaries-create.component';
 import { PrimariesDetailComponent } from './components/primaries/primaries-detail/primaries-detail.component';
 import { PrimariesMainComponent } from './components/primaries/primaries-main/primaries-main.component';
+import { PrimariesUpdateSupplierComponent } from './components/primaries/primaries-update-supplier/primaries-update-supplier.component';
 import { PrimariesUpdateComponent } from './components/primaries/primaries-update/primaries-update.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:"primaries/create", component: PrimariesCreateComponent},
   {path:"primaries/update/:id", component: PrimariesUpdateComponent},
   {path:"primaries/add-supplier/:id", component: PrimariesAddSupplierComponent},
+  {path:"primaries/update-supplier/:id/:supplierId", component: PrimariesUpdateSupplierComponent},
   {path:"**", redirectTo: '', pathMatch: 'full'}
 ];
 
