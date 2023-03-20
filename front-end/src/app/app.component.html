@@ -1,12 +1,12 @@
 <div class="main-container">
     <nav class="navigation">
-        <a class="home-icon" (click)="toggleClass(0)" routerLink="/home"><span class="material-symbols-outlined home-icon-size">logo_dev</span></a>
+        <a class="home-icon" routerLink="/home"><span class="material-symbols-outlined home-icon-size">logo_dev</span></a>
         <div class="links">
-            <a class="link" (click)="toggleClass(1)" [ngClass]="active==1 ? 'success' : 'danger'" routerLink="/primaries"><span class="material-symbols-outlined icon-size">counter_1</span></a>
-            <a class="link" (click)="toggleClass(2)" [ngClass]="active==2 ? 'success' : 'danger'" routerLink="/home"><span class="material-symbols-outlined icon-size">counter_2</span></a>
-            <a class="link" (click)="toggleClass(3)" [ngClass]="active==3 ? 'success' : 'danger'" routerLink="/home"><span class="material-symbols-outlined icon-size">counter_3</span></a>
-            <a class="link" (click)="toggleClass(4)" [ngClass]="active==4 ? 'success' : 'danger'" routerLink="/home"><span class="material-symbols-outlined icon-size">counter_4</span></a>
-            <a class="link" (click)="toggleClass(5)" [ngClass]="active==5 ? 'success' : 'danger'" routerLink="/home"><span class="material-symbols-outlined icon-size">counter_5</span></a>
+            <a [routerLinkActive]="'active'" class="link" routerLink="primaries"><span class="material-symbols-outlined icon-size">counter_1</span></a>
+            <a [routerLinkActive]="'active'" class="link" routerLink="subproducts"><span class="material-symbols-outlined icon-size">counter_2</span></a>
+            <a [routerLinkActive]="'active'" class="link" routerLink="budgets"><span class="material-symbols-outlined icon-size">counter_3</span></a>
+            <a [routerLinkActive]="'active'" class="link" routerLink="constructions"><span class="material-symbols-outlined icon-size">counter_4</span></a>
+            <a [routerLinkActive]="'active'" class="link" routerLink="suppliers"><span class="material-symbols-outlined icon-size">counter_5</span></a>
         </div>
         <p class="nav-footer"></p>
     </nav>

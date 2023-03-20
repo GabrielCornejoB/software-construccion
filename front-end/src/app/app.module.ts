@@ -13,6 +13,10 @@ import { PrimariesCreateComponent } from './components/primaries/primaries-creat
 import { PrimariesUpdateComponent } from './components/primaries/primaries-update/primaries-update.component';
 import { PrimariesAddSupplierComponent } from './components/primaries/primaries-add-supplier/primaries-add-supplier.component';
 import { PrimariesUpdateSupplierComponent } from './components/primaries/primaries-update-supplier/primaries-update-supplier.component';
+import { SubproductsMainComponent } from './components/subproducts/subproducts-main/subproducts-main.component';
+import { BudgetsMainComponent } from './components/budgets/budgets-main/budgets-main.component';
+import { ConstructionsMainComponent } from './components/constructions/constructions-main/constructions-main.component';
+import { SuppliersMainComponent } from './components/suppliers/suppliers-main/suppliers-main.component';
 
 
 @NgModule({
@@ -25,6 +29,10 @@ import { PrimariesUpdateSupplierComponent } from './components/primaries/primari
     PrimariesUpdateComponent,
     PrimariesAddSupplierComponent,
     PrimariesUpdateSupplierComponent,
+    SubproductsMainComponent,
+    BudgetsMainComponent,
+    ConstructionsMainComponent,
+    SuppliersMainComponent,
   ],
   imports: [
     BrowserModule,

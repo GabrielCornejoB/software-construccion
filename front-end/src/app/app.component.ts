@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'software-construccion';
-  active: number = 0;
-  isHome: boolean = true;
-  toggleClass(newActive: number){
-    this.active = newActive;
-  }
+  // active: number = 0;
+  // isHome: boolean = true;
+  // toggleClass(newActive: number){
+  //   this.active = newActive;
+  // }
 }
