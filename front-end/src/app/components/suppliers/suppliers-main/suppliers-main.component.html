@@ -1,1 +1,25 @@
-<p>suppliers-main works!</p>
+<div class="container">
+    <div class="title">
+        <h1>Proveedores</h1>
+        <a href="" class="button bigger-button">Agregar Proveedor</a>
+    </div>
+    <hr>
+    <div class="suppliers-table">
+        <div class="headings align-suppliers">
+            <h6>ID</h6>
+            <h6>Nombre Proveedor</h6>
+        </div>
+        <div class="data">
+            <ng-container *ngFor="let sup of suppliers">
+                <div class="entry align-suppliers">
+                    <div class="entry-text"><p>{{sup.id}}</p></div>
+                    <div class="entry-text"><p>{{sup.supplier}}</p></div>
+                    <div class="entry-buttons">
+                        <a  style="transition: 0.6s"><span class="material-symbols-outlined update-button">edit</span></a>
+                        <span  class="material-symbols-outlined delete-button">delete</span>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
