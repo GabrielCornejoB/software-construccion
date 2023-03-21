@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SupplierOfPrimary } from '../types/Primary';
+import { Supplier } from '../types/Supplier';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,9 @@ export class SuppliersService {
 
   getSuppliers(): Observable<any> {
     return this.http.get<SupplierOfPrimary>(this.URL + "/get-suppliers");
+  }
+
+  addSupplier(supplier: Supplier): Observable<any> {
+    return this.http.post(this.URL + "/add-supplier", supplier);
   }
 }

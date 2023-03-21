@@ -25,7 +25,7 @@ exports.addSupplier = async (req, res) => {
 
         const newSupplier = new Supplier({id: counter, supplier: req.body.supplier});
         await newSupplier.save();
-        return res.send(req.body.supplier);
+        return res.json(req.body.supplier);
     }catch (error) {
         res.status(500).send("" + error);
     }
