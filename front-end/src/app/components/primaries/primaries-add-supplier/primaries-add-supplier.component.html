@@ -4,7 +4,7 @@
         <a [routerLink]="['/primaries', 'detail', id]" class="button bigger-button back-button">Volver</a>
     </div>
     <hr>
-    <form class="create-form" [formGroup]="supplierForm" (ngSubmit)="addSupplierToPrimary()">
+    <form class="form" [formGroup]="supplierForm" (ngSubmit)="addSupplierToPrimary()">
         <div class="input-div">
             <label for="supplier">Proveedor</label>
             <select class="form-input" name="supplier" id="supplier" formControlName="supplierId">

@@ -4,7 +4,7 @@
         <a routerLink="/primaries" class="button bigger-button back-button">Volver</a>
     </div>
     <hr>
-    <form class="create-form" [formGroup]="primaryForm" (ngSubmit)="createPrimary()">   
+    <form class="form" [formGroup]="primaryForm" (ngSubmit)="createPrimary()">   
         <div class="input-div">
             <label for="primary">Nombre del primario</label>
             <input class="form-input" id="primary" type="text" formControlName="primary">

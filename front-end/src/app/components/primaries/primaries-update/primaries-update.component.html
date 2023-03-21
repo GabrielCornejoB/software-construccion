@@ -1,9 +1,10 @@
 <div class="container">
     <div class="title">
         <h1>Modificar Primario "{{ primaryName }}"</h1>
+        <a [routerLink]="['/primaries']" class="button bigger-button back-button">Volver</a>
     </div>
     <hr>
-    <form class="update-form" [formGroup]="primaryForm" (ngSubmit)="updatePrimary()">   
+    <form class="form" [formGroup]="primaryForm" (ngSubmit)="updatePrimary()">   
         <div class="input-div">
             <label for="primary">Nombre del primario</label>
             <input class="form-input" id="primary" type="text" formControlName="primary">
