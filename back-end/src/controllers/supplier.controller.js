@@ -44,3 +44,12 @@ exports.updateSupplier = async (req, res) => {
         res.status(500).send("" + error);
     }
 }
+exports.getSupplier = async (req, res) => {
+    try {
+        const supplierExists = await Supplier.findOne({id: req.params.id});
+        if (!supplierExists) return res.status(400).send("Supplier id '" + req.params.id + "' doesn't exist");
+        return res.json(supplierExists);
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+}

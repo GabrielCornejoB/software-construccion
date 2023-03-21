@@ -19,4 +19,12 @@ export class SuppliersService {
   addSupplier(supplier: Supplier): Observable<any> {
     return this.http.post(this.URL + "/add-supplier", supplier);
   }
+
+  getSupplier(id: string): Observable<any> {
+    return this.http.get(this.URL + '/get-supplier/' + id);
+  }
+
+  updateSupplier(id: string, supplier: Supplier): Observable<any> {
+    return this.http.put(this.URL + '/update-supplier/' + id, supplier);
+  }
 }

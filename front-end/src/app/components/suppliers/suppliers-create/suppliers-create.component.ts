@@ -29,11 +29,5 @@ export class SuppliersCreateComponent {
         this.supplierForm.reset();
       }
     });
-    // this.suppliersService.addSupplier(supplier).subscribe(data => {
-    //   this.router.navigate(['/suppliers']);
-    // }, error => {
-    //   console.log(error);
-    //   this.supplierForm.reset();
-    // })
   }
 }

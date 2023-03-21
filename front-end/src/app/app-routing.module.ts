@@ -12,6 +12,7 @@ import { PrimariesUpdateComponent } from './components/primaries/primaries-updat
 import { SubproductsMainComponent } from './components/subproducts/subproducts-main/subproducts-main.component';
 import { SuppliersCreateComponent } from './components/suppliers/suppliers-create/suppliers-create.component';
 import { SuppliersMainComponent } from './components/suppliers/suppliers-main/suppliers-main.component';
+import { SuppliersUpdateComponent } from './components/suppliers/suppliers-update/suppliers-update.component';
 
 const routes: Routes = [
   {path:"", component: HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path:"constructions", component:ConstructionsMainComponent},
   {path:"suppliers", component:SuppliersMainComponent},
   {path:"suppliers/create", component:SuppliersCreateComponent},
+  {path:"suppliers/update/:id", component: SuppliersUpdateComponent},
   {path:"**", redirectTo: '', pathMatch: 'full'}
 ];
 

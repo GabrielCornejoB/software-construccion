@@ -18,6 +18,7 @@ import { BudgetsMainComponent } from './components/budgets/budgets-main/budgets-
 import { ConstructionsMainComponent } from './components/constructions/constructions-main/constructions-main.component';
 import { SuppliersMainComponent } from './components/suppliers/suppliers-main/suppliers-main.component';
 import { SuppliersCreateComponent } from './components/suppliers/suppliers-create/suppliers-create.component';
+import { SuppliersUpdateComponent } from './components/suppliers/suppliers-update/suppliers-update.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SuppliersCreateComponent } from './components/suppliers/suppliers-creat
     ConstructionsMainComponent,
     SuppliersMainComponent,
     SuppliersCreateComponent,
+    SuppliersUpdateComponent,
   ],
   imports: [
     BrowserModule,

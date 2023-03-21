@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="title">
+        <h1>Actualizar "{{supplierName}}"</h1>
+        <a routerLink="/suppliers" class="button bigger-button back-button">Volver</a>
+    </div>
+    <hr>
+    <form class="form" [formGroup]="supplierForm" (ngSubmit)="updateSupplier()">
+        <div class="input-div">
+            <label for="supplier">Nombre Proveedor</label>
+            <input type="text" name="supplier" class="form-input" formControlName="supplier">
+            <ng-container *ngIf="supplierForm.get('supplier')?.hasError('required') && supplierForm.get('supplier')?.touched">
+                <p class="error-message">Este campo es <u><b>obligatorio</b></u></p>
+            </ng-container>
+        </div>
+        <div class="input-div">
+            <button type="submit" [disabled]="supplierForm.invalid" class="button submit-button">Actualizar Proveedor</button>
+        </div>
+    </form>
+</div>
