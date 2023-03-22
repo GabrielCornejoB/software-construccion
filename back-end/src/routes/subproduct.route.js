@@ -6,7 +6,7 @@ router.post('/add-subproduct', subproductController.addSubproduct);
 
 // router.post('/add-component-to-subproduct');
 
-// router.put('/update-subproduct');
+router.put('/update-subproduct/:id', subproductController.updateSubproduct);
 
 // router.delete('/delete-subproduct');
 
