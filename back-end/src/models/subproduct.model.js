@@ -2,18 +2,18 @@ const { Schema, model } = require('mongoose');
 
 const subproductSchema = new Schema(
     {
-        id: Number,
-        subproduct: String,
-        unit: String,
-        fullPrice: Number,
-        details: String,
+        id: {type: Number, required: true},
+        subproduct: {type: String, required: true},
+        unit: {type: String, required: true, 
+            enum: ["m", "m2", "m3", "ml", "m3-km", "viaje", "kg", "ton", "lb", "gal", "hr", "dia", "pipeta", "un", "saco", "lata", "cuñete", "rollo"]},
+        fullPrice: {type: Number, required: true},
         components: [
             {
-                id: Number,
-                group: String,
-                consumption: Number,
-                waste: Number,
-                fullPrice: Number
+                id: {type: Number, required: true},
+                group: {type: String, required: true},
+                consumption: {type: Number, required: true},
+                waste: {type: Number, required: true},
+                fullPrice: {type: Number, required: true}
             }
         ]
     }
