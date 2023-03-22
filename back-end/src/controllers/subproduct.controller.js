@@ -29,3 +29,12 @@ exports.addSubproduct = async (req, res) => {
         else res.status(500).send("" + error);
     }
 }
+exports.getSubproducts = async (req, res) => {
+    try {
+        const subproducts = await Subproduct.find();
+        if (!subproducts) return res.status(404).send("There are 0 subproducts");
+        res.json(subproducts);
+    } catch (error) {
+        res.status(500).send("" + error);
+    }
+}

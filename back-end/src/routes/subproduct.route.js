@@ -12,7 +12,7 @@ router.post('/add-subproduct', subproductController.addSubproduct);
 
 // router.delete('/delete-component-of-subproduct');
 
-// router.get('/get-subproducts');
+router.get('/get-subproducts', subproductController.getSubproducts);
 
 // router.get('./get-subproduct-with-components');
 
