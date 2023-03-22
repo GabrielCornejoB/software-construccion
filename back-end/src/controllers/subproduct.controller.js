@@ -1,4 +1,5 @@
 const Subproduct = require('../models/subproduct.model');
+const Primary = require('../models/primary.model');
 const Counter = require('../models/counter.model');
 
 exports.addSubproduct = async (req, res) => {
@@ -61,5 +62,31 @@ exports.deleteSubproduct = async (req, res) => {
         res.json({msg: "Subproduct Deleted succesfully"});
     } catch (error) {
         res.status(500).send("" + error);
+    }
+}
+exports.addComponentToSubproduct = async (req, res) => {
+    try {
+        const { id, group, consumption, waste} = req.body;
+        const subproductExists = await Subproduct.findOne({id: req.params.id});
+        if (!subproductExists) return res.status(404).json({msg: "Subproduct doesn't exists"});
+        if (group == "Subproductos") {
+            const otherSubproductExists = await Subproduct.findOne({id: id});
+            if (!otherSubproductExists) return res.status(404).json({msg: "Subproduct doesn't exists"});
+        }
+        else {
+            const primaryExists = await Primary.findOne({id: id});
+            if (!primaryExists) return res.status(404).json({msg: "Primary doesn't exists"});
+        }
+        subproductExists.components.push({
+            id: id,
+            group: group,
+            consumption: consumption,
+            waste: waste
+        });
+        await subproductExists.save();
+        res.json(subproductExists);
+    } catch (error) {
+        if (error.errors?.group) res.status(400).send("Invalid or missing field 'group'");
+        else res.status(500).send("" + error);
     }
 }

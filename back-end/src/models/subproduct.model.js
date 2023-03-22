@@ -10,10 +10,10 @@ const subproductSchema = new Schema(
         components: [
             {
                 id: {type: Number, required: true},
-                group: {type: String, required: true},
+                group: {type: String, required: true, 
+                    enum: ["Diseños", "Ensayos", "Equipos", "Herramientas", "M.O.", "Materiales", "Polimericos", "Servicios", "Subcontratos", "Subproductos", "Transportes"]},
                 consumption: {type: Number, required: true},
-                waste: {type: Number, required: true},
-                fullPrice: {type: Number, required: true}
+                waste: {type: Number, required: true}
             }
         ]
     }

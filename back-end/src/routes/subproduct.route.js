@@ -4,7 +4,7 @@ const subproductController = require('../controllers/subproduct.controller');
 
 router.post('/add-subproduct', subproductController.addSubproduct);
 
-// router.post('/add-component-to-subproduct');
+router.post('/add-component-to-subproduct/:id', subproductController.addComponentToSubproduct);
 
 router.put('/update-subproduct/:id', subproductController.updateSubproduct);
 
