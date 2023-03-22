@@ -19,7 +19,6 @@ exports.addSubproduct = async (req, res) => {
             subproduct: subproduct,
             unit: unit,
             fullPrice: 0,
-            details: details,
             components: []
         });
         await newSubproduct.save();
@@ -52,5 +51,15 @@ exports.updateSubproduct = async (req, res) => {
     } catch (error) {
         if (error.errors?.unit) res.status(400).send("Invalid or missing field 'unit'");
         else res.status(500).send("" + error);
+    }
+}
+exports.deleteSubproduct = async (req, res) => {
+    try {
+        const subproductExists = await Subproduct.findOne({id: req.params.id});
+        if (!subproductExists) return res.status(404).send("Subproduct with id '" + req.params.id + "' doesn't exist");
+        await Subproduct.deleteOne({id: req.params.id});
+        res.json({msg: "Subproduct Deleted succesfully"});
+    } catch (error) {
+        res.status(500).send("" + error);
     }
 }
